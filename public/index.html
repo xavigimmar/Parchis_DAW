@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ca">
+<head>
+    <meta charset="utf-8">
+    <title>Párchis</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="main.js"></script>
+    <link href="style.css" type="text/css" rel="stylesheet"/>
+</head>
+<body>
+  <h1>Parchis</h1>
+  <div id="tablero">
+    <svg width="100" height="100">
+        <use href="prueba.svg#usar"></use>
+    </svg>
+
+    <svg width="1400" height="1400">
+        <use href="parchis_limpio_conid.svg#layer1"></use>
+    </svg>
+  </div>
+
+  <div id="messages"></div>
+
+  </br>
+  <form onsubmit="return addMessage(this)">
+      <input id="username" type="text" placeholder="Tu nombre">
+      <input id="texto" type="text" placeholder="Cuentanos algo...">
+      <input type="submit" valor="Send">
+  </form>
+</body>
+</html>

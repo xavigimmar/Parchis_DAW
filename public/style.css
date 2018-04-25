@@ -1,0 +1,15 @@
+#tablero{
+  width: 70%;
+  height: 800px;
+  float: left;
+  background: #c1ffff;
+  border: 1 px solid black;
+}
+
+#messages{
+  width: 30%;
+  height: 750px;
+  float: left;
+  background: #f6f8ac;
+  border: 1 px solid black;
+}
