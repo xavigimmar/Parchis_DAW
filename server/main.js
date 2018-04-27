@@ -24,6 +24,12 @@ io.on('connection',function(socket){
     io.sockets.emit('messages',mensajes);
   });
 
+  //socket.emit('test'," hola que haces");
+  socket.on("dados",function(dados){
+    //console.log(dados[0],dados[1]);
+    console.log("adsad");
+  });
+  
 });
 
 server.listen(8080,function(){

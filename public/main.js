@@ -5,6 +5,15 @@ socket.on('messages',function(data){
   render(data);
 });
 
+/*
+socket.on('test',function(test){
+  document.getElementById('h1').innerHTML += test;
+});
+*/
+
+var dados = Array(0,1);
+socket.emit("dados",datos);
+
 function render(data){
   var html = data.map(function(element, index){
     return(`<div>
