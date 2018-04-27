@@ -11,7 +11,7 @@ socket.on('test',function(test){
 });
 */
 
-var dados = Array(0,1);
+var dados = [5,2];
 socket.emit("dados",datos);
 
 function render(data){
