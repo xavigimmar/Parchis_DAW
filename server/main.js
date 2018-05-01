@@ -24,10 +24,13 @@ io.on('connection',function(socket){
     io.sockets.emit('messages',mensajes);
   });
 
-  //socket.emit('test'," hola que haces");
+  /*
+  var test = "soy un test de mensaje";
+  socket.emit('test',test);*/
+  
   socket.on("dados",function(dados){
-    //console.log(dados[0],dados[1]);
-    console.log("adsad");
+    console.log(dados[0],dados[1]);
+    socket.emit("actualizartitulo",dados[0]);
   });
   
 });
