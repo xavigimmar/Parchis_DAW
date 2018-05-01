@@ -44,8 +44,8 @@ window.onload = function(){
   console.log(svg);
 
   svg
-    .selectAll("#ficha")
-    .on("mouseover",function(){
+    .selectAll('*[id^="ficha"]')
+    .on("click",function(){
       
       var id = d3.select(this).attr("id");
       console.log(id);
