@@ -11,11 +11,12 @@ socket.on('test',function(test){
 });
 */
 
-var dados = Array(0,1);
+var numran = Math.round(Math.random()*9);
+var dados = Array(numran,1);
 socket.emit("dados",dados);
 
 socket.on("actualizartitulo",function(dado0){
-  document.getElementById('h1').innerHTML += " " + dado0;
+  document.getElementById('h1').innerHTML = "Parchís " + dado0;
 });
 
 function render(data){
