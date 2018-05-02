@@ -1,2 +1,2 @@
-var socket = io.connect('http://localhost:3030');
+var socket = io.connect();
 

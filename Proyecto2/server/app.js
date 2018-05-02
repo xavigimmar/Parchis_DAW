@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var io = require('socket.io')(http);
+var io = require('socket.io').listen(http);
 
 app.use(express.static('views'));
 
@@ -15,6 +15,6 @@ io.on('connection', function(socket) {
 });
 
 // Puerto de escucha del servidor
-http.listen(8080, function() {
-    console.log('Escuchando en el puerto 8080');
+http.listen(3030, function() {
+    console.log('Escuchando en el puerto 3030');
 });
