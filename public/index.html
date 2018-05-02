@@ -4,12 +4,15 @@
     <meta charset="utf-8">
     <title>Párchis</title>
     <script src="/socket.io/socket.io.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="main.js"></script>
     <link href="style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-  <h1 id="h1">Parchis</h1>
+  <h1 id="h1">Parchís</h1>
+  <button id="boton" type="button">Dados</button> 
   <div id="tablero">
+    <!--
     <svg width="100" height="100">
         <use href="prueba.svg#usar"></use>
     </svg>
@@ -17,6 +20,10 @@
     <svg width="1400" height="1400">
         <use href="parchis_limpio_conid.svg#layer1"></use>
     </svg>
+    -->
+
+    <object data="parchis_v2.0_acabado.svg" type="image/svg+xml" id="parchis" width="50%" height="100%"></object>
+
   </div>
 
   <div id="messages"></div>
@@ -27,6 +34,5 @@
       <input id="texto" type="text" placeholder="Cuentanos algo...">
       <input type="submit" valor="Send">
   </form>
-  <p>asada</p>
 </body>
 </html>
