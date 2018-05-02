@@ -1,12 +1,12 @@
-var socket = io.connect('http://localhost:9090',{'forceNew':true});
+var socket = io.connect();
 
 socket.on('messages',function(data){
   //console.log(data);
   render(data);
 });  
 
-socket.on("actualizartitulo",function(dado0){
-  document.getElementById('h1').innerHTML = "Parchís " + dado0;
+socket.on("actualizartitulo",function(dados){
+  document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
 });  
   
 function render(data){

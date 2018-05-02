@@ -27,7 +27,7 @@ io.on('connection',function(socket){
   
   socket.on("dados",function(dados){
     console.log(dados[0],dados[1]);
-    socket.emit("actualizartitulo",dados[0]);
+    io.sockets.emit("actualizartitulo",dados);
   });
   
 });
