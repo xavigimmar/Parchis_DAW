@@ -19,6 +19,7 @@
   "homepage": "https://github.com/xavigimmar/Parchis_DAW#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "rgb-hex": "^2.1.0",
     "socket.io": "^2.1.0"
   },
   "devDependencies": {
