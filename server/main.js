@@ -7,7 +7,7 @@ var rgbHex = require('rgb-hex');
 var mensajes = [{
   id: 1,
   texto: "hola tendo tierras",
-  author: "pepe viruela"
+  author: "pepe villuela"
 }]
 
 app.use(express.static('public'));
@@ -38,6 +38,11 @@ io.on('connection',function(socket){
 
   socket.on("conectado", function(){
     socket.broadcast.emit("hola");
+  });
+
+  socket.on("movimiento",function(fichasamover){
+    console.log("He recivido un movimiento");
+    socket.broadcast.emit("muevoficha",fichasamover)
   });
   
 });

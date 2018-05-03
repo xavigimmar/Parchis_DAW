@@ -76,30 +76,9 @@ window.onload = function(){
       }        
       
       if(fichasamover.length == 2){
-        var idficha1 = "#"+fichasamover[0].id;
-        var colorficha1 = "fill:"+fichasamover[0].fill;
-        console.log(colorficha1);
-        var idficha2 = "#"+fichasamover[1].id;
-        var colorficha2 = "fill:"+fichasamover[1].fill;
-        console.log(colorficha1);
-
-        var r = new RegExp(/fill:#([a-f0-9]+)/);
-        var r1 = new RegExp(/opacity:(0|1)+/);
-          
-        var f1 = svg.select(idficha1).attr('style');
-        console.log("f1 anter: " + f1);
-        var newStyle = f1.replace(r,colorficha2);
-            //newStyle = f1.replace(r1,"opacity:0"); 
-        svg.select(idficha1).attr('style',newStyle); 
-        console.log("f1 despues: " + f1);
-
-        var f2 = svg.select(idficha2).attr('style');
-        console.log("f2 anter: " + f2);
-        var newStyle1 = f2.replace(r,colorficha1);
-            //newStyle1 = f2.replace(r1,"opacity:1");
-        svg.select(idficha2).attr('style',newStyle1); 
-        console.log("f2 despues: " + f2);
-
+        socket.emit("movimiento",fichasamover);
+        var mover = moverfichas(fichasamover);
+        fichasamover = [];
       }
     });
 
@@ -107,6 +86,39 @@ window.onload = function(){
       var hex = c.toString(16);
       return hex.length == 1 ? "0" + hex : hex;
     }
+
+    function moverfichas(fichas){
+
+      var idficha1 = "#"+fichas[0].id;
+      var colorficha1 = "fill:"+fichas[0].fill;
+      console.log(colorficha1);
+      var idficha2 = "#"+fichas[1].id;
+      var colorficha2 = "fill:"+fichas[1].fill;
+      console.log(colorficha2);
+
+      var r = new RegExp(/fill:#([a-f0-9]+)/);
+      var r1 = new RegExp(/opacity:(0|1)+/);
+        
+      var f1 = svg.select(idficha1).attr('style');
+      console.log("f1 anter: " + f1);
+      var newStyle = f1.replace(r,"fill:#ffffff");
+          newStyle = f1.replace(r1,"opacity:0"); 
+      svg.select(idficha1).attr('style',newStyle); 
+      var f1 = svg.select(idficha1).attr('style');
+      console.log("f1 despues: " + f1);
+
+      var f2 = svg.select(idficha2).attr('style');
+      console.log("f2 anter: " + f2);
+      var newStyle1 = f2.replace(r,colorficha1);
+          newStyle1 = f2.replace(r1,"opacity:1");
+      svg.select(idficha2).attr('style',colorficha1); 
+      var f2 = svg.select(idficha2).attr('style');
+      console.log("f2 despues: " + f2);
+    }
+
+    socket.on("muevoficha", function(fichas){
+      moverfichas(fichas);
+    });
 
   var a = document.getElementById("parchis");
   var svgDoc = a.contentDocument;
