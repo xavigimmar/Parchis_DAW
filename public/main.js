@@ -75,7 +75,6 @@ window.onload = function(){
         } 
       }        
       
-
       if(fichasamover.length == 2){
         var idficha1 = "#"+fichasamover[0].id;
         var colorficha1 = "fill:"+fichasamover[0].fill;
