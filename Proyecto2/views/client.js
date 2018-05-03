@@ -1,2 +1,2 @@
-var socket = io.connect();
+var socket = io.connect();  // Conectarse al socket
 

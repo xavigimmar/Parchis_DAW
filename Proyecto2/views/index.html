@@ -1,15 +1,35 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Parchís</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="client.js"></script>
-    <link href="css/style.css" rel="stylesheet" type="text/css" />
+    <script src="js/events.js"></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
-    <h1>Menú</h1>
-    <div id="login">
-        Holaa
+    <div id="contenedorLogin">
+        <img id="logoParchis" class="img-responsive" src="img/logoParchis.svg" /><br /><br />
+        <p id="titleLogin">Iniciar sesión</p>
+
+        <form id="formLogin" class="form-group">
+
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <input id="usuario" class="form-control" type="text" placeholder="Nombre de usuario" /><br />
+          </div>
+
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            <input id="pass" class="form-control" type="password" placeholder="Contraseña" />
+            <span class="input-group-addon"><i id="show-hide-passwd" class="glyphicon glyphicon-eye-open"></i></span>
+          </div>
+          <br />
+          <input type="submit" class="form-control" value="Entrar" />
+        
+         </form>
+        
     </div>
   </body>
 </html>

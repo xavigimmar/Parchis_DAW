@@ -1,7 +1,33 @@
-#login {
-    width: 50%;
-    height: 50%;
-    border: 1px black solid;
-    margin: 0px auto;
-    background: red;
+/* FUENTES DE LETRA */
+
+/* Login */
+#usuario:focus {
+    /*background: ;*/
 }
+
+#logoParchis {
+    width: 70%;
+    margin: 0 auto;
+}
+
+#titleLogin {
+    font-weight: bold;
+}
+
+#contenedorLogin {
+    border: 1px black solid;
+    text-align: center;
+    padding: 3%;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+#show-hide-passwd {
+    /*width: 10%;*/
+}
+
+
+
+/* Formulario de inicio de sesión */
