@@ -88,7 +88,6 @@ window.onload = function(){
     }
 
     function moverfichas(fichas){
-
       var idficha1 = "#"+fichas[0].id;
       var colorficha1 = "fill:"+fichas[0].fill;
       console.log(colorficha1);
@@ -101,8 +100,8 @@ window.onload = function(){
         
       var f1 = svg.select(idficha1).attr('style');
       console.log("f1 anter: " + f1);
-      var newStyle = f1.replace(r,"fill:#ffffff");
-          newStyle = f1.replace(r1,"opacity:0"); 
+      var newStyle = f1.replace(r,colorficha2);
+          newStyle = newStyle.replace(r1,"opacity:0"); 
       svg.select(idficha1).attr('style',newStyle); 
       var f1 = svg.select(idficha1).attr('style');
       console.log("f1 despues: " + f1);
@@ -110,8 +109,8 @@ window.onload = function(){
       var f2 = svg.select(idficha2).attr('style');
       console.log("f2 anter: " + f2);
       var newStyle1 = f2.replace(r,colorficha1);
-          newStyle1 = f2.replace(r1,"opacity:1");
-      svg.select(idficha2).attr('style',colorficha1); 
+          newStyle1 = newStyle1.replace(r1,"opacity:1");
+      svg.select(idficha2).attr('style',newStyle1); 
       var f2 = svg.select(idficha2).attr('style');
       console.log("f2 despues: " + f2);
     }
