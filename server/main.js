@@ -2,6 +2,7 @@ var express = require('express');
 var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
+var rgbHex = require('rgb-hex');
 
 var mensajes = [{
   id: 1,
@@ -28,6 +29,15 @@ io.on('connection',function(socket){
   socket.on("dados",function(dados){
     console.log(dados[0],dados[1]);
     io.sockets.emit("actualizartitulo",dados);
+  });
+
+  socket.on("rgbTohx",function(color){
+    var hx = "#"+rgbHex(color);
+    socket.emit("resrgbTohx",hx);
+  });
+
+  socket.on("conectado", function(){
+    socket.broadcast.emit("hola");
   });
   
 });
