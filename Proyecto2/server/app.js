@@ -6,7 +6,16 @@ var io = require('socket.io').listen(http);
 app.use(express.static('views'));
 
 app.get('/', function(req, res) {
-    res.sendFile( __dirname + '/index.html');
+    //res.sendFile( __dirname + '/index.html');
+    res.sendFile(path.join(__dirname, '../views', '/index.html'));
+});
+
+app.get('/login', function(req, res) {
+    var nombre = req.query.nombre;
+    var pass = req.query.pass;
+    //res.send(nombre);
+    //res.sendFile( __dirname + '/login.html');
+    res.sendFile(path.join(__dirname, '../views', '/login.html'));
 });
 
 // Conexión de un nuevo socket
