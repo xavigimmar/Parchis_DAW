@@ -1,5 +1,9 @@
 /* FUENTES DE LETRA */
 
+body {
+    background-image: url(../img/wallpaper.png);
+}
+
 /* Login */
 #usuario:focus {
     /*background: ;*/
@@ -22,6 +26,7 @@
     margin: 0 auto;
     max-width: 400px;
     margin-top: 10px;
+    background-color: white;
 }
 
 #enviar {

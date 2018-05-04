@@ -3,19 +3,25 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io').listen(http);
 
-app.use(express.static('views'));
+app.use('/css', express.static(__dirname + '/views/css'));
+app.use('/js', express.static(__dirname + '/views/js'));
+app.use('/img', express.static(__dirname + '/views/img'));
+app.use('/', express.static(__dirname + '/views'));
 
+// REDIRECCIONES
 app.get('/', function(req, res) {
-    //res.sendFile( __dirname + '/index.html');
-    res.sendFile(path.join(__dirname, '../views', '/index.html'));
+    res.sendFile( __dirname + '/views/index.html');
 });
 
 app.get('/login', function(req, res) {
     var nombre = req.query.nombre;
     var pass = req.query.pass;
     //res.send(nombre);
-    //res.sendFile( __dirname + '/login.html');
-    res.sendFile(path.join(__dirname, '../views', '/login.html'));
+    res.sendFile( __dirname + '/views/login.html');
+});
+
+app.get('/register', function(req, res) {
+    res.sendFile( __dirname + '/views/signup.html');
 });
 
 // Conexión de un nuevo socket
