@@ -49,6 +49,7 @@ window.onload = function () {
 
   var puentes = [];
   var fichasamover = [];
+
   svg
     .selectAll('*[id^="ficha"]')
     .on("click", function () {
@@ -89,7 +90,7 @@ window.onload = function () {
     return hex.length == 1 ? "0" + hex : hex;
   }
 
-  
+
 
   function moverfichas(fichas) {
     var r = new RegExp(/fill:#([a-f0-9]+)/);
@@ -97,41 +98,63 @@ window.onload = function () {
 
     var idficha1 = "#" + fichas[0].id;
     var colorficha1 = "fill:" + fichas[0].fill;
-    console.log(colorficha1);
-    
     var idficha2 = "#" + fichas[1].id;
-    if(idficha2.length-1 != 2){
-      pos3 = idficha2.substr(0,idficha2.length-1)+"3";
-      pos2 = idficha2.substr(0,idficha2.length-1)+"2";
-      pos1 = idficha2.substr(0,idficha2.length-1)+"1";
-      
+    var colorficha2 = "fill:" + fichas[1].fill;
+
+    console.log(idficha1.charAt(idficha1.length - 1));
+    if (idficha1.charAt(idficha1.length - 1) != 2) {
+      var pos3 = idficha1.substr(0, idficha1.length - 1) + "3";
+      var pos2 = idficha1.substr(0, idficha1.length - 1) + "2";
+      var pos1 = idficha1.substr(0, idficha1.length - 1) + "1";
+
+      var fichaarriba = svg.select(pos3).attr('style');
+      var fichaarribablanca = fichaarriba.replace(r, "fill:#ffffff");
+      var fichaarribablancapaca = fichaarribablanca.replace(r1, "opacity:0");
+      svg.select(pos3).attr('style', fichaarribablancapaca);
+
+      var fichamedio = svg.select(pos2).attr('style');
+      var fichamediocolor = fichamedio.replace(r, colorficha1);
+      var fichamediocolormostrar = fichamediocolor.replace(r1, "opacity:1");
+      svg.select(pos2).attr('style', fichamediocolormostrar);
+
+      var fichaabajo = svg.select(pos1).attr('style');
+      var fichaabajoblanca = fichaabajo.replace(r, "fill:#ffffff");
+      var fichaabajoblancapaca = fichaabajoblanca.replace(r1, "opacity:0");
+      svg.select(pos1).attr('style', fichaabajoblancapaca);
+    }
+
+    if (idficha2.charAt(idficha2.length - 1) != 2) {
+      var pos3 = idficha2.substr(0, idficha2.length - 1) + "3";
+      var pos2 = idficha2.substr(0, idficha2.length - 1) + "2";
+      var pos1 = idficha2.substr(0, idficha2.length - 1) + "1";
+
       var fichacentral = svg.select(pos2);
       var ocupada = fichacentral.attr('style');
 
       var color = "";
-      for(var i=30; i<37; i++){
+      for (var i = 30; i < 37; i++) {
         color += ocupada.charAt(i);
       }
 
-      if(color == "#ffffff"){
+      if (color == "#ffffff") {
         idficha2 = pos2;
       }
-      if(color == "#D64949"){
+      if (color == "#D64949") {
         idficha2 = idficha1;
         alert("no puedes pasar");
       }
-      if(color == fichas[0].fill){
+      if (color == fichas[0].fill) {
         var fichaabajo = svg.select(pos1).attr('style');
         var fichaabajocolor = fichaabajo.replace(r, colorficha1);
         fichaabajocolormostrar = fichaabajocolor.replace(r1, "opacity:1");
         svg.select(pos3).attr('style', fichaabajocolormostrar);
 
         var fichamedio = svg.select(pos2).attr('style');
-        var fichamedioblanca = fichamedio.replace(r, "fill:#D64949");
+        var fichamedioblanca = fichamedio.replace(r, "fill:#ffffff");
         fichamedioblancapaca = fichamedioblanca.replace(r1, "opacity:0");
         svg.select(pos2).attr('style', fichamedioblancapaca);
 
-        idficha2 = pos1; 
+        idficha2 = pos1;
 
         new_puente = new Object();
         new_puente.color = fichas[0].fill;
@@ -141,10 +164,7 @@ window.onload = function () {
         puentes.push(new_puente);
       }
     }
-    console.log(puentes);
-    //if(idficha1)
-
-    var colorficha2 = "fill:" + fichas[1].fill;    
+    //console.log(puentes);
 
     var f1 = svg.select(idficha1).attr('style');
     //console.log("f1 anter: " + f1);
