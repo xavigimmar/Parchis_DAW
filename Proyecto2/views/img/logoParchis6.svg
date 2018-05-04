@@ -2,6 +2,7 @@
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
+   xmlns:osb="http://www.openswatchbook.org/uri/2009/osb"
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
@@ -10,15 +11,32 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="255.77602mm"
-   height="161.59778mm"
-   viewBox="0 0 906.29297 572.59056"
+   width="288.90262mm"
+   height="189.59286mm"
+   viewBox="0 0 1023.6707 671.78575"
    id="svg2"
    version="1.1"
    inkscape:version="0.92.3 (unknown)"
-   sodipodi:docname="logoParchis4.svg">
+   sodipodi:docname="logoParchis6.svg"
+   style="enable-background:new">
   <defs
      id="defs4">
+    <linearGradient
+       id="linearGradient2850"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#3771c8;stop-opacity:1;"
+         offset="0"
+         id="stop2848" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient2844"
+       osb:paint="solid">
+      <stop
+         style="stop-color:#3771c8;stop-opacity:1;"
+         offset="0"
+         id="stop2842" />
+    </linearGradient>
     <filter
        style="color-interpolation-filters:sRGB"
        inkscape:label="Drop Shadow"
@@ -149,10 +167,10 @@
          id="feComposite8890" />
     </filter>
     <filter
-       inkscape:label="Jigsaw Piece"
+       inkscape:label="Brilliance"
        inkscape:menu="Bevels"
        inkscape:menu-tooltip="Low, sharp bevel"
-       style="color-interpolation-filters:sRGB;"
+       style="color-interpolation-filters:sRGB"
        id="filter1200">
       <feSpecularLighting
          in="SourceAlpha"
@@ -179,7 +197,117 @@
       <feComposite
          in="result0"
          in2="result1"
-         id="feComposite1198" />
+         id="feComposite1198"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix319" />
+      <feFlood
+         id="feFlood321"
+         flood-opacity="0.498039"
+         flood-color="rgb(0,0,0)"
+         result="flood"
+         in="fbSourceGraphic" />
+      <feComposite
+         in2="fbSourceGraphic"
+         id="feComposite323"
+         in="flood"
+         operator="in"
+         result="composite1" />
+      <feGaussianBlur
+         id="feGaussianBlur325"
+         in="composite1"
+         stdDeviation="22.1"
+         result="blur" />
+      <feOffset
+         id="feOffset327"
+         dx="14.2"
+         dy="12.9"
+         result="offset" />
+      <feComposite
+         in2="offset"
+         id="feComposite329"
+         in="fbSourceGraphic"
+         operator="over"
+         result="fbSourceGraphic" />
+      <feColorMatrix
+         result="fbSourceGraphicAlpha"
+         in="fbSourceGraphic"
+         values="0 0 0 -1 0 0 0 0 -1 0 0 0 0 -1 0 0 0 0 1 0"
+         id="feColorMatrix459" />
+      <feColorMatrix
+         id="feColorMatrix461"
+         values="2 -0.37 -0.37 0 0 -0.37 2 -0.37 0 0 -0.37 -0.37 2 0 0 0 0 0 1 0 "
+         in="fbSourceGraphic" />
+    </filter>
+    <filter
+       inkscape:label="Combined Lighting"
+       inkscape:menu="Bevels"
+       inkscape:menu-tooltip="Basic specular bevel to use for building textures"
+       style="color-interpolation-filters:sRGB"
+       id="filter3945">
+      <feGaussianBlur
+         stdDeviation="6"
+         in="SourceGraphic"
+         result="result0"
+         id="feGaussianBlur3927" />
+      <feDiffuseLighting
+         lighting-color="#ffffff"
+         diffuseConstant="1"
+         surfaceScale="4"
+         result="result5"
+         id="feDiffuseLighting3931">
+        <feDistantLight
+           elevation="45"
+           azimuth="235"
+           id="feDistantLight3929" />
+      </feDiffuseLighting>
+      <feComposite
+         k1="1.4"
+         in2="SourceGraphic"
+         in="result5"
+         result="fbSourceGraphic"
+         operator="arithmetic"
+         id="feComposite3933"
+         k2="0"
+         k3="0"
+         k4="0" />
+      <feGaussianBlur
+         result="result0"
+         in="fbSourceGraphic"
+         stdDeviation="6"
+         id="feGaussianBlur3935" />
+      <feSpecularLighting
+         specularExponent="25"
+         specularConstant="1"
+         surfaceScale="4"
+         lighting-color="#ffffff"
+         result="result1"
+         in="result0"
+         id="feSpecularLighting3939">
+        <feDistantLight
+           azimuth="235"
+           elevation="45"
+           id="feDistantLight3937" />
+      </feSpecularLighting>
+      <feComposite
+         k3="1"
+         k2="1"
+         operator="arithmetic"
+         in="fbSourceGraphic"
+         in2="result1"
+         result="result4"
+         id="feComposite3941"
+         k1="0"
+         k4="0" />
+      <feComposite
+         operator="in"
+         result="result2"
+         in2="SourceGraphic"
+         in="result4"
+         id="feComposite3943" />
     </filter>
   </defs>
   <sodipodi:namedview
@@ -190,8 +318,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.35"
-     inkscape:cx="12.108362"
-     inkscape:cy="79.310588"
+     inkscape:cx="-118.54367"
+     inkscape:cy="147.09625"
      inkscape:document-units="px"
      inkscape:current-layer="layer2"
      showgrid="false"
@@ -220,7 +348,7 @@
      inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Fondo"
-     transform="translate(-2.9364748e-5)"
+     transform="translate(57.349471,43.681824)"
      sodipodi:insensitive="true">
     <ellipse
        id="path135"
@@ -228,14 +356,29 @@
        cy="292.21106"
        rx="274.55359"
        ry="279.91074"
-       style="fill:#3771c8;stroke:none;stroke-width:0.9375;stroke-opacity:1" />
+       style="opacity:1;fill:#3771c8;fill-opacity:1;stroke:#000000;stroke-width:0.9375;stroke-opacity:1" />
+  </g>
+  <g
+     transform="translate(57.349471,43.681824)"
+     inkscape:label="Fondo2"
+     id="g2875"
+     inkscape:groupmode="layer"
+     sodipodi:insensitive="true">
+    <ellipse
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#000000;stroke-width:24.46875;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter3945)"
+       ry="279.91074"
+       rx="274.55359"
+       cy="292.21106"
+       cx="424.55356"
+       id="ellipse2873" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="Dados"
-     transform="translate(1520.4171,-54.070471)"
-     style="display:inline">
+     transform="translate(1577.7667,-10.388648)"
+     style="display:inline"
+     sodipodi:insensitive="true">
     <image
        y="140.61415"
        x="-1314.521"
@@ -244,51 +387,52 @@
        preserveAspectRatio="none"
        height="361.17468"
        width="460.64923"
-       style="fill:none;stroke:none;stroke-width:24.79672241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1200)" />
+       style="fill:none;stroke:none;stroke-width:24.79672241;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter1200)"
+       transform="matrix(1.1837851,0,0,1.2066509,193.90202,-110.57301)" />
   </g>
   <g
      inkscape:label="Texto"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(1520.4171,-54.070471)"
+     transform="translate(1577.7667,-10.388648)"
      style="display:inline"
      sodipodi:insensitive="true">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:211.05996704px;line-height:0%;font-family:SimLLHP;-inkscape-font-specification:'SimLLHP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:26.29781151;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       x="-1440.509"
-       y="583.67627"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:246.91264343px;line-height:0%;font-family:SimLLHP;-inkscape-font-specification:'SimLLHP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:30.76501083;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       x="-1540.9598"
+       y="574.74725"
        id="text4155"
-       transform="scale(1.0021111,0.99789335)"><tspan
+       transform="scale(0.96754262,1.0335462)"><tspan
          sodipodi:role="line"
          id="tspan4157"
-         x="-1440.509"
-         y="583.67627"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:211.05996704px;line-height:1.25;font-family:SimLLHP;-inkscape-font-specification:'SimLLHP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"><tspan
-           style="fill:#0000ff;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         x="-1540.9598"
+         y="574.74725"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:246.91264343px;line-height:1.25;font-family:SimLLHP;-inkscape-font-specification:'SimLLHP, Normal';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"><tspan
+           style="fill:#0000ff;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3718">P</tspan><tspan
-           style="fill:#ff2a2a;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#ff2a2a;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3720">A</tspan><tspan
-           style="fill:#00ff00;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#00ff00;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3724">R</tspan><tspan
-           style="fill:#ff6600;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#ff6600;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3726">C</tspan><tspan
-           style="fill:#ffcc00;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#ffcc00;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3736">H</tspan><tspan
-           style="fill:#aad400;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#aad400;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3738">Í</tspan><tspan
-           style="fill:#00ccff;stroke:#000000;stroke-width:26.29781151;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+           style="fill:#00ccff;stroke:#000000;stroke-width:30.76501083;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
            id="tspan3742">S</tspan></tspan></text>
   </g>
   <g
      style="display:inline"
-     transform="translate(1520.4171,-54.070471)"
+     transform="translate(1577.7667,-10.388648)"
      id="g8530"
      inkscape:groupmode="layer"
      inkscape:label="Texto copia"
      sodipodi:insensitive="true">
     <text
-       transform="scale(1.0021111,0.99789335)"
+       transform="matrix(1.1318987,0,0,1.2091143,139.56598,-111.70344)"
        id="text8528"
        y="583.67627"
        x="-1440.509"
