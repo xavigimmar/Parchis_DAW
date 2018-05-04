@@ -38,8 +38,8 @@ window.onload = function(){
   var lanzar_dados = document.getElementById('boton');
     
   lanzar_dados.addEventListener("click",function(){
-    var numran1 = Math.round(Math.random()*9);
-    var numran2 = Math.round(Math.random()*9);
+    var numran1 = Math.round(Math.random()*5)+1;
+    var numran2 = Math.round(Math.random()*5)+1;
     var dados = Array(numran1,numran2);
     socket.emit("dados",dados);    
   });
