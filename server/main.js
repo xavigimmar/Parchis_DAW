@@ -12,41 +12,41 @@ var mensajes = [{
 
 app.use(express.static('public'));
 
-app.get('/',function(req, res){
+app.get('/', function (req, res) {
   res.status(200).send("Pipas pal pajaro");
 });
 
-io.on('connection',function(socket){
+io.on('connection', function (socket) {
   console.log("Alguien se ha conectado con socket");
-  socket.emit('messages',mensajes);
+  socket.emit('messages', mensajes);
 
-  socket.on("new-message",function(data){
+  socket.on("new-message", function (data) {
     mensajes.push(data);
-    io.sockets.emit('messages',mensajes);
+    io.sockets.emit('messages', mensajes);
   });
 
-  
-  socket.on("dados",function(dados){
-    console.log(dados[0],dados[1]);
-    io.sockets.emit("actualizartitulo",dados);
+
+  socket.on("dados", function (dados) {
+    console.log(dados[0], dados[1]);
+    io.sockets.emit("actualizartitulo", dados);
   });
 
-  socket.on("rgbTohx",function(color){
-    var hx = "#"+rgbHex(color);
-    socket.emit("resrgbTohx",hx);
+  socket.on("rgbTohx", function (color) {
+    var hx = "#" + rgbHex(color);
+    socket.emit("resrgbTohx", hx);
   });
 
-  socket.on("conectado", function(){
+  socket.on("conectado", function () {
     socket.broadcast.emit("hola");
   });
 
-  socket.on("movimiento",function(fichasamover){
+  socket.on("movimiento", function (fichasamover) {
     console.log("He recivido un movimiento");
-    socket.broadcast.emit("muevoficha",fichasamover)
+    socket.broadcast.emit("muevoficha", fichasamover)
   });
-  
+
 });
 
-server.listen(9090,function(){
+server.listen(9090, function () {
   console.log("Servidor iniciado por el pueto http://localhost:9090");
 });
