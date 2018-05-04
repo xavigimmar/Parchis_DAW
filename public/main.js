@@ -117,6 +117,7 @@ window.onload = function () {
         idficha2 = pos2;
       }
       if(color == "#D64949"){
+        idficha2 = idficha1;
         alert("no puedes pasar");
       }
       if(color == fichas[0].fill){
