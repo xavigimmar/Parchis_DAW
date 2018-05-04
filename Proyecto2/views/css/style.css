@@ -6,7 +6,7 @@
 }
 
 #logoParchis {
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -24,8 +24,10 @@
     margin-top: 10px;
 }
 
-#show-hide-passwd {
-    /*width: 10%;*/
+#enviar {
+    color: white;
+    background: #0069d9;
+    border: none;
 }
 
 
