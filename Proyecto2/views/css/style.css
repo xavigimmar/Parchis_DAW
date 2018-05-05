@@ -1,7 +1,12 @@
 /* FUENTES DE LETRA */
 
 body {
-    background-image: url(../img/wallpaper.png);
+    background-image: url("../img/wallpaper.png");
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    background-color: transparent;
 }
 
 /* Login */
@@ -35,6 +40,14 @@ body {
     border: none;
 }
 
-
-
-/* Formulario de inicio de sesión */
+/* Registro / Sign Up */
+#contenedorRegister {
+    margin: 0 auto;
+    border: 1px black solid;
+    background-color: white;
+    text-align: center;
+    padding: 3px;
+    width: 100%;
+    max-width: 600px;
+    margin-top: 10px;
+}
