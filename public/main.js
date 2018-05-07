@@ -1,18 +1,22 @@
 var socket = io.connect();
 
+// renderizado de los mensajes del chat
 socket.on('messages', function (data) {
   //console.log(data);
   render(data);
 });
 
+// Incustacion de los dados aleatorios en el titulo
 socket.on("actualizartitulo", function (dados) {
   document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
 });
 
+// mensaje de alerta de cuando se conecta un usuario a la partida
 socket.emit('conectado');
 socket.on("hola", function () {
   alert("Hola me he conectado a tu partida");
 });
+
 function render(data) {
   var html = data.map(function (element, index) {
     return (`<div>
@@ -101,86 +105,103 @@ window.onload = function () {
     var idficha2 = "#" + fichas[1].id;
     var colorficha2 = "fill:" + fichas[1].fill;
 
-    console.log(idficha1.charAt(idficha1.length - 1));
-    if (idficha1.charAt(idficha1.length - 1) != 2) {
-      var pos3 = idficha1.substr(0, idficha1.length - 1) + "3";
-      var pos2 = idficha1.substr(0, idficha1.length - 1) + "2";
-      var pos1 = idficha1.substr(0, idficha1.length - 1) + "1";
+    var pos3 = idficha1.substr(0, idficha1.length - 1) + "3";
+    var pos2 = idficha1.substr(0, idficha1.length - 1) + "2";
+    var pos1 = idficha1.substr(0, idficha1.length - 1) + "1";
 
-      var fichaarriba = svg.select(pos3).attr('style');
-      var fichaarribablanca = fichaarriba.replace(r, "fill:#ffffff");
-      var fichaarribablancapaca = fichaarribablanca.replace(r1, "opacity:0");
-      svg.select(pos3).attr('style', fichaarribablancapaca);
+    if (idficha1 == idficha2) {
+      alert("No puedes poner la ficha en el mismo sitio!!!\nTonto!");
+    } else if (idficha2 == pos3 || idficha2 == pos2 || idficha2 == pos1) {
+      alert("Que pretendes?\nDuplicarte?");
+    } else {
+      if (idficha1.charAt(idficha1.length - 1) != 2) {
+        pos3 = idficha1.substr(0, idficha1.length - 1) + "3";
+        pos2 = idficha1.substr(0, idficha1.length - 1) + "2";
+        pos1 = idficha1.substr(0, idficha1.length - 1) + "1";
 
-      var fichamedio = svg.select(pos2).attr('style');
-      var fichamediocolor = fichamedio.replace(r, colorficha1);
-      var fichamediocolormostrar = fichamediocolor.replace(r1, "opacity:1");
-      svg.select(pos2).attr('style', fichamediocolormostrar);
-
-      var fichaabajo = svg.select(pos1).attr('style');
-      var fichaabajoblanca = fichaabajo.replace(r, "fill:#ffffff");
-      var fichaabajoblancapaca = fichaabajoblanca.replace(r1, "opacity:0");
-      svg.select(pos1).attr('style', fichaabajoblancapaca);
-    }
-
-    if (idficha2.charAt(idficha2.length - 1) != 2) {
-      var pos3 = idficha2.substr(0, idficha2.length - 1) + "3";
-      var pos2 = idficha2.substr(0, idficha2.length - 1) + "2";
-      var pos1 = idficha2.substr(0, idficha2.length - 1) + "1";
-
-      var fichacentral = svg.select(pos2);
-      var ocupada = fichacentral.attr('style');
-
-      var color = "";
-      for (var i = 30; i < 37; i++) {
-        color += ocupada.charAt(i);
-      }
-
-      if (color == "#ffffff") {
-        idficha2 = pos2;
-      }
-      if (color == "#D64949") {
-        idficha2 = idficha1;
-        alert("no puedes pasar");
-      }
-      if (color == fichas[0].fill) {
-        var fichaabajo = svg.select(pos1).attr('style');
-        var fichaabajocolor = fichaabajo.replace(r, colorficha1);
-        fichaabajocolormostrar = fichaabajocolor.replace(r1, "opacity:1");
-        svg.select(pos3).attr('style', fichaabajocolormostrar);
+        var fichaarriba = svg.select(pos3).attr('style');
+        var fichaarribablanca = fichaarriba.replace(r, "fill:#ffffff");
+        var fichaarribablancapaca = fichaarribablanca.replace(r1, "opacity:0");
+        svg.select(pos3).attr('style', fichaarribablancapaca);
 
         var fichamedio = svg.select(pos2).attr('style');
-        var fichamedioblanca = fichamedio.replace(r, "fill:#ffffff");
-        fichamedioblancapaca = fichamedioblanca.replace(r1, "opacity:0");
-        svg.select(pos2).attr('style', fichamedioblancapaca);
+        var fichamediocolor = fichamedio.replace(r, colorficha1);
+        var fichamediocolormostrar = fichamediocolor.replace(r1, "opacity:1");
+        svg.select(pos2).attr('style', fichamediocolormostrar);
 
-        idficha2 = pos1;
-
-        new_puente = new Object();
-        new_puente.color = fichas[0].fill;
-        new_puente.ficha1 = pos1;
-        new_puente.ficha2 = pos2;
-        new_puente.ficha3 = pos3;
-        puentes.push(new_puente);
+        var fichaabajo = svg.select(pos1).attr('style');
+        var fichaabajoblanca = fichaabajo.replace(r, "fill:#ffffff");
+        var fichaabajoblancapaca = fichaabajoblanca.replace(r1, "opacity:0");
+        svg.select(pos1).attr('style', fichaabajoblancapaca);
       }
+
+      if (idficha2.charAt(idficha2.length - 1) != 2) {
+        pos3 = idficha2.substr(0, idficha2.length - 1) + "3";
+        pos2 = idficha2.substr(0, idficha2.length - 1) + "2";
+        pos1 = idficha2.substr(0, idficha2.length - 1) + "1";
+
+        var fichacentral = svg.select(pos2);
+        var ocupada = fichacentral.attr('style');
+
+        var color = "";
+        for (var i = 30; i < 37; i++) {
+          color += ocupada.charAt(i);
+        }
+
+        if (color == "#ffffff") {
+          idficha2 = pos2;
+        }
+        if (color == "#D64949") {
+          idficha2 = idficha1;
+          alert("no puedes pasar");
+        }
+        if (color == fichas[0].fill) {
+          var fichaabajo = svg.select(pos1).attr('style');
+          var fichaabajocolor = fichaabajo.replace(r, colorficha1);
+          fichaabajocolormostrar = fichaabajocolor.replace(r1, "opacity:1");
+          svg.select(pos3).attr('style', fichaabajocolormostrar);
+
+          var fichamedio = svg.select(pos2).attr('style');
+          var fichamedioblanca = fichamedio.replace(r, "fill:#ffffff");
+          fichamedioblancapaca = fichamedioblanca.replace(r1, "opacity:0");
+          svg.select(pos2).attr('style', fichamedioblancapaca);
+
+          idficha2 = pos1;
+
+          new_puente = new Object();
+          new_puente.color = fichas[0].fill;
+          new_puente.ficha1 = pos1;
+          new_puente.ficha2 = pos2;
+          new_puente.ficha3 = pos3;
+          puentes.push(new_puente);
+        }
+      }
+
+      console.log(puentes);
+
+      var f1 = svg.select(idficha1).attr('style');
+      var newStyle = f1.replace(r, colorficha2);
+      newStyle = newStyle.replace(r1, "opacity:0");
+      svg.select(idficha1).attr('style', newStyle);
+
+      var f2 = svg.select(idficha2).attr('style');
+      var newStyle1 = f2.replace(r, colorficha1);
+      newStyle1 = newStyle1.replace(r1, "opacity:1");
+      svg.select(idficha2).attr('style', newStyle1);
+      var f2 = svg.select(idficha2).attr('style');
+
+      /* // esto es para cuando se rompa el puente borrarlo del array de objetos de puentes
+      for(var element in puentes){
+        var temp = puentes[element];
+        var content = Object.values(temp);
+        console.log(content);
+        if(content.includes(idficha1)){
+          console.log("esta");
+        }
+      }*/
+
+
     }
-    //console.log(puentes);
-
-    var f1 = svg.select(idficha1).attr('style');
-    //console.log("f1 anter: " + f1);
-    var newStyle = f1.replace(r, colorficha2);
-    newStyle = newStyle.replace(r1, "opacity:0");
-    svg.select(idficha1).attr('style', newStyle);
-    //var f1 = svg.select(idficha1).attr('style');
-    //console.log("f1 despues: " + f1);
-
-    var f2 = svg.select(idficha2).attr('style');
-    //console.log("f2 anter: " + f2);
-    var newStyle1 = f2.replace(r, colorficha1);
-    newStyle1 = newStyle1.replace(r1, "opacity:1");
-    svg.select(idficha2).attr('style', newStyle1);
-    var f2 = svg.select(idficha2).attr('style');
-    //console.log("f2 despues: " + f2);
   }
 
   socket.on("muevoficha", function (fichas) {
