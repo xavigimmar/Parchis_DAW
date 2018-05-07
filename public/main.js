@@ -17,6 +17,7 @@ socket.on("hola", function () {
   alert("Hola me he conectado a tu partida");
 });
 
+// funcion de añadir mensajes al array del chat
 function render(data) {
   var html = data.map(function (element, index) {
     return (`<div>
@@ -28,6 +29,7 @@ function render(data) {
   document.getElementById('messages').innerHTML = html;
 }
 
+// funcion de crear mensajes del chat
 function addMessage(e) {
   var mensaje = {
     author: document.getElementById('username').value,
@@ -38,9 +40,12 @@ function addMessage(e) {
   return false;
 }
 
+// carga de las funciones del js
 window.onload = function () {
+  // coger el boton del dato
   var lanzar_dados = document.getElementById('boton');
 
+  // funcion para generar los dados
   lanzar_dados.addEventListener("click", function () {
     var numran1 = Math.round(Math.random() * 5) + 1;
     var numran2 = Math.round(Math.random() * 5) + 1;
