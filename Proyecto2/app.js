@@ -1,3 +1,5 @@
+var mongo = require(__dirname + '/views/js/mongodb.js');
+
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
@@ -9,19 +11,24 @@ app.use('/img', express.static(__dirname + '/views/img'));
 app.use('/', express.static(__dirname + '/views'));
 
 // REDIRECCIONES
-app.get('/', function(req, res) {
+app.get('/', function(req, res) { // REDIRECCIÓN A RAÍZ
     res.sendFile( __dirname + '/views/index.html');
 });
 
-app.get('/login', function(req, res) {
+app.get('/login', function(req, res) { // REDIRECCIÓN A LOGIN
     var nombre = req.query.nombre;
     var pass = req.query.pass;
     //res.send(nombre);
     res.sendFile( __dirname + '/views/login.html');
 });
 
-app.get('/signup', function(req, res) {
+app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
     res.sendFile( __dirname + '/views/signup.html');
+});
+
+app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
+    mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
+    //res.sendFile( __dirname + '/views/index.html');
 });
 
 // Conexión de un nuevo socket

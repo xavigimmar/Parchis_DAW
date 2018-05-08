@@ -1,64 +1,78 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Parchís - Registro</title>
-    <!--<script type="text/javascript" src="js/events.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="css/style.css" type="text/css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="js/signup.js"></script>
-  </head>
-  <body>
-    <div class="container">
-        <form id="formSignup" method="post" class="form-group">
 
-          <!-- HEADER -->
-          <div class="form-header">
-            <h3 id="titleRegister">
-              <span class="glyphicon glyphicon-log-in"></span> Registro
-            </h3>
-          </div>
+<head>
+  <title>Parchís - Registro</title>
+  <!--<script type="text/javascript" src="js/events.js"></script>-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" type="text/css" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+    crossorigin="anonymous">
+  <script src="js/signup.js"></script>
+</head>
 
-          <!-- BODY -->
-          <div class="form-body">
+<body>
+  <div class="container">
 
-            <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-              <input id="userRegister" type="text" class="form-control" placeholder="Nombre de usuario">
-            </div>
-
-            <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input id="emailRegister" type="email" class="form-control" placeholder="Correo electrónico">
-            </div>
-
-            <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input id="passwordRegister" type="password" class="form-control" placeholder="Contraseña">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input id="passwordRegister2" type="password" class="form-control" placeholder="Repetir contraseña">
-            </div>
-
-          </div>
-
-          <!-- FOOTER -->
-          <div class="form-footer">
-
-            <div class="input-group">
-              <button id="register" type="submit" class="btn btn-info">
-                <span class="glyphicon glyphicon-log-in"></span> Registrarse
-              </button>
-            </div>
-            
-          </div>
-          <br />
-
-          <div id="loguearse">
-            Ya tienes una cuenta? <a href="/login">Loguéate</a>
-          </div>
-
-        </form>
+    <!-- HEADER -->
+    <div class="form-header">
+      <h3 id="titleRegister">
+        <span class="glyphicon glyphicon-log-in"></span> Registro
+      </h3>
     </div>
-  </body>
-  
+
+    
+    <!-- BODY -->
+    <form id="formSignup" method="get" class="form-group"></form>
+      <div class="form-body">
+
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-user"></i>
+          </span>
+          <input id="userRegister" type="text" class="form-control" placeholder="Nombre de usuario" required>
+        </div>
+        <div id="message"></div>
+
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-envelope"></i>
+          </span>
+          <input id="emailRegister" type="email" class="form-control" placeholder="Correo electrónico" required>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-lock"></i>
+          </span>
+          <input id="passwordRegister" type="password" class="form-control" placeholder="Contraseña" required>
+          <span class="input-group-addon">
+            <i class="glyphicon glyphicon-lock"></i>
+          </span>
+          <input id="passwordRegister2" type="password" class="form-control" placeholder="Repetir contraseña" required>
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <div class="form-footer">
+
+        <div class="input-group">
+          <button id="register" type="submit" class="btn btn-info">
+            <span class="glyphicon glyphicon-log-in"></span> Registrarse
+          </button>
+        </div>
+
+      </div>
+      <br />
+
+      <div id="loguearse">
+        Ya tienes una cuenta?
+        <a href="/login">Loguéate</a>
+      </div>
+
+    </form>
+  </div>
+</body>
+
 </html>
