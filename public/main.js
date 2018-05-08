@@ -53,29 +53,36 @@ window.onload = function () {
     socket.emit("dados", dados);
   });
 
+  // variable que coge el svg del parchis
   var svg = d3.select(document.getElementById("parchis").contentDocument);
-  console.log(svg);
+  // console.log(svg);
 
+  // inicializacion de la variable que contendra los puentes y los movimientos de las fichas
   var puentes = [];
   var fichasamover = [];
 
+
   svg
-    .selectAll('*[id^="ficha"]')
+    .selectAll('*[id^="ficha"]')  // selecciona todos los elementos que empiezen por el id ficha
     .on("click", function () {
 
+      // variable para el id de las fichas
       var id = d3.select(this).attr("id");
 
+      // generar array para pas fichas a mover
       if (fichasamover.length != 2) {
         var relleno = rgb2hex(this.style.fill);
 
+        // condicion si el array ya tiene una ficha
         if (fichasamover.length == 1) {
           var ficha2 = new Object();
           ficha2.id = id;
           ficha2.fill = relleno;
           fichasamover.push(ficha2);
 
-          console.log(fichasamover);
+          //console.log(fichasamover);
         } else {
+          // control de la posicion donde la quieres poner
           if (relleno != "#ffffff") {
             var ficha1 = new Object();
             ficha1.id = id;
@@ -87,6 +94,7 @@ window.onload = function () {
         }
       }
 
+      // hacer el movimiento cuando ya has seleccionado 2 fichas
       if (fichasamover.length == 2) {
         socket.emit("movimiento", fichasamover);
         var mover = moverfichas(fichasamover);
@@ -94,13 +102,14 @@ window.onload = function () {
       }
     });
 
+  
   function componentToHex(c) {
     var hex = c.toString(16);
     return hex.length == 1 ? "0" + hex : hex;
   }
 
 
-
+  // funcion para mover las fichas
   function moverfichas(fichas) {
     var r = new RegExp(/fill:#([a-f0-9]+)/);
     var r1 = new RegExp(/opacity:(0|1)+/);
@@ -184,11 +193,13 @@ window.onload = function () {
 
       console.log(puentes);
 
+      // tratamiento de la primera ficha
       var f1 = svg.select(idficha1).attr('style');
       var newStyle = f1.replace(r, colorficha2);
       newStyle = newStyle.replace(r1, "opacity:0");
       svg.select(idficha1).attr('style', newStyle);
 
+      // tratamiento de la segunda ficha
       var f2 = svg.select(idficha2).attr('style');
       var newStyle1 = f2.replace(r, colorficha1);
       newStyle1 = newStyle1.replace(r1, "opacity:1");
@@ -209,19 +220,13 @@ window.onload = function () {
     }
   }
 
+  // se ejecutara cuando el rival haga un movimiendo
+  // se le para el array de fichasamover
   socket.on("muevoficha", function (fichas) {
     moverfichas(fichas);
   });
 
-  var a = document.getElementById("parchis");
-  var svgDoc = a.contentDocument;
-  var circulo11 = svgDoc.getElementById("ficha11-1");
-
-  circulo11.addEventListener("mouseover", function () {
-    this.style.fill = "green";
-    this.style.opacity = 1;
-  }, false);
-
+  // pasar los colores de rgba a hexadecimal
   function rgb2hex(orig) {
     var rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+)/i);
     return (rgb && rgb.length === 4) ? "#" +
@@ -230,7 +235,17 @@ window.onload = function () {
       ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
   }
 
-  //console.log(rgb2hex("rgba(255, 255, 255)"));
+/*// prueba de coger una ficha y ponerla verde
+  var a = document.getElementById("parchis");
+  var svgDoc = a.contentDocument;
+  var circulo11 = svgDoc.getElementById("ficha11-1");
+
+  circulo11.addEventListener("mouseover", function () {
+    this.style.fill = "green";
+    this.style.opacity = 1;
+  }, false);
+*/
+
 }
 
 
