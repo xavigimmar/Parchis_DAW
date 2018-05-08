@@ -7,7 +7,7 @@
 ////////////////////////////////////////////////////////////////
 
 window.onload = () => {
-    var mongoose = require('mongoose');
+    var mongoose = require('mongodb');
 
     mongoose.connect('mongodb://localhost/users_parchis', function(err) {
         if(err) throw err;
