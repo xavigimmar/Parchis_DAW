@@ -35,6 +35,7 @@ function dado(){
       });
       
       $('#result').html(number);
+      $('#result1').html(number);
       
     }, 1120);
   };

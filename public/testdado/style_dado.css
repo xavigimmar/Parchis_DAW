@@ -18,6 +18,18 @@
     bottom: 20%;
     left: calc(50% - 40px);
   }
+
+  #result1 {
+    text-align: center;
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+    padding: 5px;
+    position: absolute;
+    width: 70px;
+    bottom: 20%;
+    left: calc(70% - 40px);
+  }
   #ui_dado {
     margin: 0px auto;
     border: solid 2px black;
