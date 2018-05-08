@@ -20,7 +20,7 @@ body {
 }
 
 #titleLogin {
-    font-weight: bold;
+    
 }
 
 #contenedorLogin {
@@ -41,13 +41,41 @@ body {
 }
 
 /* Registro / Sign Up */
-#contenedorRegister {
-    margin: 0 auto;
+.container {
     border: 1px black solid;
     background-color: white;
-    text-align: center;
     padding: 3px;
     width: 100%;
     max-width: 600px;
     margin-top: 10px;
+}
+
+.form-header {
+    /*border-bottom: 1px grey solid;*/
+    text-align: center;
+    margin: 0 auto;
+}
+
+.form-body {
+    /*margin-top: 15px;
+    margin-bottom: 15px;*/
+}
+
+.input-group {
+    padding: 3px;
+}
+
+.form-footer {
+    /*border-top: 1px grey solid;*/
+    border-bottom: 1px grey solid;
+}
+
+#register {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#loguearse {
+    text-align: center;
+    margin: 0 auto;
 }
