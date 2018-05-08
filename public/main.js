@@ -45,11 +45,12 @@ window.onload = function () {
   // coger el boton del dato
   var lanzar_dados = document.getElementById('boton');
 
+  var dados;
   // funcion para generar los dados
   lanzar_dados.addEventListener("click", function () {
     var numran1 = Math.round(Math.random() * 5) + 1;
     var numran2 = Math.round(Math.random() * 5) + 1;
-    var dados = Array(numran1, numran2);
+    dados = Array(numran1, numran2);
     socket.emit("dados", dados);
   });
 
@@ -60,12 +61,90 @@ window.onload = function () {
   // inicializacion de la variable que contendra los puentes y los movimientos de las fichas
   var puentes = [];
   var fichasamover = [];
-
+  var opciones = [];
+  var cas = new RegExp(/fill:#([a-f0-9]+)/);
 
   svg
-    .selectAll('*[id^="ficha"]')  // selecciona todos los elementos que empiezen por el id ficha
-    .on("click", function () {
+    .selectAll('*[id^="ficha"]')   // selecciona todos los elementos que empiezen por el id ficha
+    .on("mouseover", colorearcasillas) // funcion para iluminar casillas donde puedes poner las fichas
+    .on("click", seleccionarfichas)
+    .on("mouseout", descolorearcasillas);
 
+  function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
+
+  function colorearcasillas() {
+    if (typeof dados != "undefined") {
+      var idficha = d3.select(this).attr("id");
+      idficha = "#" + idficha;
+
+      var casilla = svg.select(idficha).attr('style');
+      var colorfich = "";
+
+      for (var i = 30; i < 37; i++) {
+        colorfich += casilla.charAt(i);
+      }
+
+      if (colorfich != "#ffffff") {
+        var num = idficha.charAt(6) + idficha.charAt(7);
+        console.log(num);
+        if (isNaN(num)) {
+          num = idficha.charAt(10) + idficha.charAt(11);
+        }
+        console.log(num);
+
+        var mouse = d3.select(this).attr("id");
+        var temp1 = parseInt(num) + dados[0],
+          temp2 = parseInt(num) + dados[1],
+          temp3 = parseInt(num) + dados[0] + dados[1];
+
+        if (temp1 < 10) temp1 = "0" + temp1;
+        if (temp2 < 10) temp2 = "0" + temp2;
+        if (temp3 < 10) temp3 = "0" + temp3;
+
+        var opcion1 = "#casilla" + temp1;
+        var opcion2 = "#casilla" + temp2;
+        var opcion3 = "#casilla" + temp3;
+
+        opciones.push(opcion1);
+        opciones.push(opcion2);
+        opciones.push(opcion3);
+
+        for (var elementos of opciones) {
+          var casilla = svg.select(elementos).attr('style');
+          var casillacolor = casilla.replace(cas, "fill:#00ccff");
+          svg.select(elementos).attr('style', casillacolor);
+        }
+
+      }
+    }
+  }
+
+  function descolorearcasillas() {
+    var defec;
+    for (var elementos of opciones) {
+      var ponercolor = svg.select(elementos).attr('style');
+
+      if (elementos == "#casilla05") defec = "fill:#ff0000";
+      else if (elementos == "#casilla68") defec = "fill:#ff0000";
+      else if (elementos == "#casilla17") defec = "fill:#188300";
+      else if (elementos == "#casilla22") defec = "fill:#188300";
+      else if (elementos == "#casilla34") defec = "fill:#f6ff4b";
+      else if (elementos == "#casilla39") defec = "fill:#f6ff4b";
+      else if (elementos == "#casilla39") defec = "fill:#3831eb";
+      else if (elementos == "#casilla39") defec = "fill:#3831eb";
+      else defec = "fill:#ffffff";
+
+      var ponercolorsus = ponercolor.replace(cas, defec);
+      svg.select(elementos).attr('style', ponercolorsus);        
+    }
+    opciones = [];
+  }
+
+  function seleccionarfichas() {
+    if (typeof dados != "undefined") {
       // variable para el id de las fichas
       var id = d3.select(this).attr("id");
 
@@ -75,6 +154,13 @@ window.onload = function () {
 
         // condicion si el array ya tiene una ficha
         if (fichasamover.length == 1) {
+          /*
+          var solo1 = "#ficha" + temp1 + "-1";
+          var solo2 = "#ficha" + temp2 + "-1";
+          var solo3 = "#ficha" + temp3 + "-1";
+          //if(id != )
+          console.log(solo1);
+          */
           var ficha2 = new Object();
           ficha2.id = id;
           ficha2.fill = relleno;
@@ -100,14 +186,8 @@ window.onload = function () {
         var mover = moverfichas(fichasamover);
         fichasamover = [];
       }
-    });
-
-  
-  function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+    }
   }
-
 
   // funcion para mover las fichas
   function moverfichas(fichas) {
@@ -235,16 +315,16 @@ window.onload = function () {
       ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
   }
 
-/*// prueba de coger una ficha y ponerla verde
-  var a = document.getElementById("parchis");
-  var svgDoc = a.contentDocument;
-  var circulo11 = svgDoc.getElementById("ficha11-1");
-
-  circulo11.addEventListener("mouseover", function () {
-    this.style.fill = "green";
-    this.style.opacity = 1;
-  }, false);
-*/
+  /*// prueba de coger una ficha y ponerla verde
+    var a = document.getElementById("parchis");
+    var svgDoc = a.contentDocument;
+    var circulo11 = svgDoc.getElementById("ficha11-1");
+  
+    circulo11.addEventListener("mouseover", function () {
+      this.style.fill = "green";
+      this.style.opacity = 1;
+    }, false);
+  */
 
 }
 

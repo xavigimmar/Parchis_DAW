@@ -1,3 +1,11 @@
+@font-face {
+  font-family: font;
+  src: url('Shine Bright - Demo.ttf');
+}
+svg{
+  font-family: font, fallBackFonts, sans-serif;
+}
+
 #tablero{
   width: 70%;
   height: 700px;

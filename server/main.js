@@ -6,7 +6,7 @@ var rgbHex = require('rgb-hex');
 
 var mensajes = [{
   id: 1,
-  texto: "hola tendo tierras",
+  texto: "hola tengo tierras",
   author: "pepe villuela"
 }]
 
