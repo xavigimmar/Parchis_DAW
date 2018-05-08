@@ -1,6 +1,7 @@
 /* Eventos */
 window.onload = function() {
 
+    // Botón para mostrar la contraseña
     var showPass = document.getElementById("show-hide-passwd");
 
     showPass.addEventListener("click", function() {

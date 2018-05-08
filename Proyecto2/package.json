@@ -1,16 +1,17 @@
 {
   "name": "Proyecto2",
   "version": "1.0.0",
-  "description": "",
+  "description": "Creación de un Parchís online con Node.js, Express, MongoDB y Socket.io",
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Xavi Giménez y Sara Garcia",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
+    "mongoose": "^5.0.17",
     "socket.io": "^2.1.0"
   },
   "devDependencies": {
