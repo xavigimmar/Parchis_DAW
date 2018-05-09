@@ -9,6 +9,11 @@ socket.on('messages', function (data) {
 // Incustacion de los dados aleatorios en el titulo
 socket.on("actualizartitulo", function (dados) {
   document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
+
+  var dice1 = document.getElementById("dice");
+  var dice2 = document.getElementById("dice2");
+  dice1.parentNode.removeChild(dice1);
+  dice2.parentNode.removeChild(dice2);
   dados3drival(dados);
 });
 
@@ -46,13 +51,14 @@ window.onload = function () {
   // coger el boton del dato  
   var lanzar_dados = document.getElementById('boton');
 
-  
+
   // funcion para generar los dados
   var dados;
   lanzar_dados.addEventListener("click", function () {
     /*
     var numran1 = Math.round(Math.random() * 5) + 1;
     var numran2 = Math.round(Math.random() * 5) + 1;*/
+    console.log(daditos);
     if (daditos == 1) {
       var dice1 = document.getElementById("dice");
       var dice2 = document.getElementById("dice2");
@@ -62,7 +68,7 @@ window.onload = function () {
     }
 
     var caca = dados3d(caca);
-    dados = Array(caca[0], caca[1]);
+    dados = Array(caca[0], caca[1], daditos);
 
     socket.emit("dados", dados);
   });
