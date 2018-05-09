@@ -46,7 +46,7 @@ body {
     background-color: white;
     padding: 3px;
     width: 100%;
-    max-width: 600px;
+    max-width: 700px;
     margin-top: 10px;
 }
 
@@ -56,13 +56,23 @@ body {
     margin: 0 auto;
 }
 
-.input-group {
+.form-body > .input-group {
     padding: 3px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+.form-footer > .input-group {
+    padding: 3px;
+    width: 500px;
+    margin: 0 auto;
 }
 
 .form-footer {
     /*border-top: 1px grey solid;*/
     border-bottom: 1px grey solid;
+    width: 600px;
+    margin: 0 auto;
 }
 
 #register {
@@ -72,5 +82,11 @@ body {
 
 #loguearse {
     text-align: center;
+    margin: 0 auto;
+    width: 500px;
+}
+
+#messageUser {
+    width: 500px;
     margin: 0 auto;
 }

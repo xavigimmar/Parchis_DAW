@@ -3,11 +3,10 @@
 
 <head>
   <title>Parchís - Registro</title>
-  <!--<script type="text/javascript" src="js/events.js"></script>-->
+  <script type="text/javascript" src="js/events.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link rel="stylesheet" href="css/style.css" type="text/css" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-    crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
   <script src="js/signup.js"></script>
 </head>
 
@@ -21,7 +20,6 @@
       </h3>
     </div>
 
-    
     <!-- BODY -->
     <form id="formSignup" method="get" class="form-group"></form>
       <div class="form-body">
@@ -30,27 +28,30 @@
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-user"></i>
           </span>
-          <input id="userRegister" type="text" class="form-control" placeholder="Nombre de usuario" required>
+          <input id="userRegister" type="text" class="form-control" placeholder="Nombre de usuario" required="true">
         </div>
-        <div id="message"></div>
+        <div id="messageUser"></div>
 
         <div class="input-group">
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-envelope"></i>
           </span>
-          <input id="emailRegister" type="email" class="form-control" placeholder="Correo electrónico" required>
+          <input id="emailRegister" type="email" class="form-control" placeholder="Correo electrónico" required="true">
         </div>
+        <div id="messageEmail"></div>
 
         <div class="input-group">
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-lock"></i>
           </span>
-          <input id="passwordRegister" type="password" class="form-control" placeholder="Contraseña" required>
+          <input id="passwordRegister" type="password" class="form-control" placeholder="Contraseña" required="true">
           <span class="input-group-addon">
             <i class="glyphicon glyphicon-lock"></i>
           </span>
-          <input id="passwordRegister2" type="password" class="form-control" placeholder="Repetir contraseña" required>
+          <input id="passwordRegister2" type="password" class="form-control" placeholder="Repetir contraseña" required="true">
+          <span class="input-group-addon"><i id="show-hide-passwd" class="glyphicon glyphicon-eye-open"></i></span>
         </div>
+        <div id="messagePass"></div>
 
       </div>
 
