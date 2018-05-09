@@ -26,6 +26,10 @@ app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
     res.sendFile( __dirname + '/views/signup.html');
 });
 
+app.get('/signup2', function(req, res) { // REDIRECCIÓN A REGISTRO
+    res.sendFile( __dirname + '/views/signup2.html');
+});
+
 app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
     mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
     //res.sendFile( __dirname + '/views/index.html');
