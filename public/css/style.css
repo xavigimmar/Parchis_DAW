@@ -6,6 +6,12 @@ svg{
   font-family: font, fallBackFonts, sans-serif;
 }
 
+#dado {
+	width: 200px;
+  height: 100px;
+  float: left;
+}
+
 #tablero{
   width: 70%;
   height: 700px;

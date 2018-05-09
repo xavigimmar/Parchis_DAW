@@ -9,6 +9,7 @@ socket.on('messages', function (data) {
 // Incustacion de los dados aleatorios en el titulo
 socket.on("actualizartitulo", function (dados) {
   document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
+  dados3drival(dados);
 });
 
 // mensaje de alerta de cuando se conecta un usuario a la partida
@@ -39,18 +40,30 @@ function addMessage(e) {
   socket.emit("new-message", mensaje);
   return false;
 }
-
+var daditos = 0;
 // carga de las funciones del js
 window.onload = function () {
-  // coger el boton del dato
+  // coger el boton del dato  
   var lanzar_dados = document.getElementById('boton');
 
-  var dados;
+  
   // funcion para generar los dados
+  var dados;
   lanzar_dados.addEventListener("click", function () {
+    /*
     var numran1 = Math.round(Math.random() * 5) + 1;
-    var numran2 = Math.round(Math.random() * 5) + 1;
-    dados = Array(numran1, numran2);
+    var numran2 = Math.round(Math.random() * 5) + 1;*/
+    if (daditos == 1) {
+      var dice1 = document.getElementById("dice");
+      var dice2 = document.getElementById("dice2");
+      dice1.parentNode.removeChild(dice1);
+      dice2.parentNode.removeChild(dice2);
+      daditos = 0;
+    }
+
+    var caca = dados3d(caca);
+    dados = Array(caca[0], caca[1]);
+
     socket.emit("dados", dados);
   });
 
@@ -138,7 +151,7 @@ window.onload = function () {
       else defec = "fill:#ffffff";
 
       var ponercolorsus = ponercolor.replace(cas, defec);
-      svg.select(elementos).attr('style', ponercolorsus);        
+      svg.select(elementos).attr('style', ponercolorsus);
     }
     opciones = [];
   }
@@ -315,6 +328,7 @@ window.onload = function () {
       ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
   }
 
+
   /*// prueba de coger una ficha y ponerla verde
     var a = document.getElementById("parchis");
     var svgDoc = a.contentDocument;
@@ -325,6 +339,7 @@ window.onload = function () {
       this.style.opacity = 1;
     }, false);
   */
+
 
 }
 

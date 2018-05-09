@@ -3,18 +3,30 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Párchis</title>
+    <title>Párchisa</title>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
-    <script src="main.js"></script>
-    <link href="style.css" type="text/css" rel="stylesheet" />
+    <script src="js/main.js"></script>
+    <link href="css/style.css" type="text/css" rel="stylesheet" />
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js"></script>
+    <script src="js/dado.js"></script>
+    <link href="css/style_dado.css" type="text/css" rel="stylesheet" />
+
 </head>
 
 <body>
     <h1 id="h1">Parchís</h1>
+    
+    <div id="dados">
+        <div id="interativo"></div>
+        <div id="interativo1"></div>
+    </div>
+
     <button id="boton" type="button">Dados</button>
     <div id="tablero">
-        <object data="parchis_v2.0_acabado.svg" type="image/svg+xml" id="parchis" width="100%" height="100%"></object>
+        <object data="parchis_v2.1_acabado.svg" type="image/svg+xml" id="parchis" width="100%" height="100%"></object>
     </div>
 
     <div id="messages"></div>
@@ -26,11 +38,6 @@
         <input type="submit" valor="Send">
     </form>
 
-    <div id="dados">
-
-
-        
-    </div>
 </body>
 
 </html>
