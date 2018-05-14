@@ -6,7 +6,11 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 
+
+    
+
 window.onload = () => {
+   
     var registrarse = document.getElementById("register");
 
     var msgUsuario = document.getElementById("messageUser"),
@@ -16,7 +20,7 @@ window.onload = () => {
     registrarse.addEventListener("click", registro);
     //registrarse.addEventListener("click", validarDatos);
 
-    if(msgUsuario != "") { // Si no está vacío
+    if(msgUsuario != "" || msgEmail != "" || msgPass != "") { // Si no está vacío
         msgUsuario.style.background = "#ff6868";
         msgUsuario.style.fontSize = "11px";
         msgUsuario.style.borderRadius = "3px";
@@ -58,6 +62,7 @@ window.onload = () => {
             pass = document.getElementById("passwordRegister").value,
             pass2 = document.getElementById("passwordRegister2").value;
 
+        // Mensajes de cada campo
         var msgUsuario = document.getElementById("messageUser"),
             msgCorreo = document.getElementById("messageEmail"),
             msgPass = document.getElementById("messagePass");
@@ -77,10 +82,34 @@ window.onload = () => {
         }
         
         // Test contraseñas
-        //if(pass.length == 0 || pass2.length == 0 || )
-
+        //if(pass.length != 0 && pass2.length != 0) {
+            //console.log(pass);
+            if(pass != pass2) {
+                msgPass.innerHTML = 'Error. Las contraseñas no coinciden';
+                document.getElementById("passwordRegister").focus();
+                document.getElementById("passwordRegister2").focus();
+                return false;
+            }
+        //}
+        
         return true;
     }
+
+    /* COMPROBACIÓN DE NICK DE USUARIO */
+    /*function comprobarNick(usuario) {
+        var MongoClient = require('mongodb').MongoClient;
+        var url = "mongodb://localhost:27017/";
+
+        MongoClient.connect(url, function(err, db) {
+            if (err) throw err;
+            var dbo = db.db("parchis");
+            dbo.collection("usuarios").find({"user":usuario}, function(err, result) {
+              if (err) throw err;
+              console.log(result);
+              db.close();
+            });
+        }); 
+    }*/
 
     /* REGISTRO */
     function registro(e) {
@@ -90,24 +119,35 @@ window.onload = () => {
             pass2 = document.getElementById("passwordRegister2").value;
 
         if(validarDatos()) { // Si la validación del form es correcta
-            //if(pass == pass2) { // Si las contraseñas coinciden
-                //e.preventDefault(); // no redirigir ya que submit lo hace
+            //if(pass == pass2) { // Si las contraseñas coinciden    
+            //e.preventDefault(); // no redirigir ya que submit lo hace
+            //if(mongo.comprobarNick(usuario)) {
+                console.log("validación correcta");
                 $.ajax({
                     url: '/profile',
                     data: { usuario: usuario, correo: correo, pass: pass },
                     type: 'GET',
     
                     success: function (json) {
-                        console.log(json);
+                        /*if(json.respuesta == true) {
+                            console.log('Todo correcto');
+                        } else {
+                            console.log("hay algo incorrecto");
+                        }*/
+                        console.log("hola");
                     },
     
                     error: function (xhr, status) {
-                        console.log('Ha habido un problema');
+                        console.log('Ha habido un problema con el registro');
                     }
                 });
-                console.log("Las contraseñas coinciden");
+
+                //console.log("Las contraseñas coinciden");
+            /*} else {
+                console.log('El nombre de usuario ya existe');
+            }*/
     
-                document.getElementById("message").innerHTML = "coinciden";
+                //document.getElementById("message").innerHTML = "coinciden";
             //} else {
                 //console.log("Las contraseñas no coinciden");
             //}

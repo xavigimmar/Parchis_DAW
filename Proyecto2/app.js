@@ -26,13 +26,28 @@ app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
     res.sendFile( __dirname + '/views/signup.html');
 });
 
-app.get('/signup2', function(req, res) { // REDIRECCIÓN A REGISTRO
-    res.sendFile( __dirname + '/views/signup2.html');
-});
-
 app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
-    mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
+    //if(mongo.comprobarNick(req.query.usuario)) {
+        /*if(mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass)) {
+            res.json({"respuesta": true});
+        } else {
+            res.json({"respuesta": false});
+        }*/
+    /*} else {
+        res.json({"respuesta": false});
+    }*/
+
+    /*var insertar = mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
+    if(insertar){
+        res.json({"respuesta": true});
+    } else {
+        res.json({"respuesta": false});
+    }*/
     //res.sendFile( __dirname + '/views/index.html');
+
+    //console.log(mongo.comprobarNick(req.query.usuario));
+    var insertar = mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
+    console.log('Insertado?: ' + insertar);
 });
 
 // Conexión de un nuevo socket
