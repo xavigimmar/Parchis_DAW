@@ -21,30 +21,51 @@ var url = "mongodb://localhost:27017/";
 //var id_usuario = 0; // Inicializar el id del usuario para que MongoDB no le asigne uno al azar
 
 // INSERTAR DATOS USUARIO
+var a;
 exports.insertarMongo = function (nombre, correo, password) {
     MongoClient.connect(url, function (err, db) {
         if (err) throw err;
         var dbo = db.db("parchis"), // Base de datos
             coleccion = dbo.collection("usuarios"); // Colección
 
-        /*var registros = coleccion.find({}); // Encuentra todos los registros guardados para poder hacer un contador de cuántos hay
-        registros.count(function(error, numDocs) {
-            id_usuario = numDocs + 1; // Contador de registros + 1
-            //console.log("Contador de registros: " + id_usuario);
-
-            var myobj = { _id: id_usuario, user: nombre, email: correo, pass: password };
-            coleccion.insertOne(myobj, function(err, res) {
-                if (err) throw err;
-                //console.log("Insertado");
-                db.close();
-            });
-        });*/
-        var myobj = { /*_id: id_usuario,*/ user: nombre, email: correo, pass: password };
-        coleccion.insertOne(myobj, function (err, res) {
-            if (err) throw err;
-            //console.log("Insertado");
-            db.close();
+        var myobj = { user: nombre, email: correo, pass: password };
+        coleccion.find({ "user": nombre }).toArray(function (err, result) {
+            var caca = result[0];
+            a = "9999";
+            if (!caca) {
+                coleccion.insertOne(myobj, function (err, res) {
+                    if (err) return false;
+                    //console.log("Insertado");
+                    db.close();
+                    a = true;
+                });
+            } else {
+                console.log("El usuario ya existe");
+                a = false;
+            }
         });
     });
+    a = true;
+    console.log("la vida es una tombola: " + a);
+}
+
+exports.comprobarNick = function (nombre) {
+    MongoClient.connect(url, function (err, db) {
+        if (err) return false;
+        var dbo = db.db("parchis"), // Base de datos
+            coleccion = dbo.collection("usuarios"); // Colección
+
+        /*coleccion.find({"user":nombre}).toArray(function(err, re) {
+            return re;
+        });*/
+
+        var nick = coleccion.find({ "user": nombre });
+        nick.count(function (err, num) {
+            console.log("contador de registros: " + num);
+        });
+    });
+
+
+
 }
 
