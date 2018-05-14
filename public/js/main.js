@@ -48,6 +48,7 @@ function addMessage(e) {
 var daditos = 0;
 // carga de las funciones del js
 window.onload = function () {
+
   // coger el boton del dato  
   var lanzar_dados = document.getElementById('boton');
 
@@ -88,6 +89,7 @@ window.onload = function () {
     .on("mouseover", colorearcasillas) // funcion para iluminar casillas donde puedes poner las fichas
     .on("click", seleccionarfichas)
     .on("mouseout", descolorearcasillas);
+
 
   function componentToHex(c) {
     var hex = c.toString(16);
