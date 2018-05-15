@@ -1,8 +1,9 @@
 function dados3d(caca) {
+  console.log("entro en tirar dados");
   var caca = [];
 
   daditos = 1;
-  console.log(daditos);
+  //console.log(daditos);
   var debug = false;
   var element = document.getElementById("interativo");
   var element1 = document.getElementById("interativo1");
@@ -96,16 +97,16 @@ function dados3d(caca) {
 
   dice.roll();
   dice2.roll();
-  
+  console.log("los dados valen " + caca);
   return caca;
 }
 
 
 function dados3drival(dados) {
   var caca = [];
-
+  console.log("entro en tirar dados del rival");
   daditos = 1;
-  console.log(daditos);
+  //console.log(daditos);
   var debug = false;
   var element = document.getElementById("interativo");
   var element1 = document.getElementById("interativo1");
@@ -199,6 +200,6 @@ function dados3drival(dados) {
 
   dice.roll();
   dice2.roll();
-  
+  console.log("dados del rival" + caca);
   return caca;
 }
