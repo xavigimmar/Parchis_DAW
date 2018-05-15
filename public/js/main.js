@@ -12,12 +12,6 @@ socket.on("actualizartitulo", function (dados) {
   console.log("Actualizo los dados");
   //document.getElementById('h1').innerHTML = "Parchís " + " - " + socketreturn + " "+ dados[0] + " " + dados[1];
   document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
-  /*
-  var divdice1 = document.getElementById("dice");
-  var divdice2 = document.getElementById("dice2");
-  divdice1.parentNode.removeChild(divdice1);
-  divdice2.parentNode.removeChild(dice2);
-  */
   console.log("actualizacion de los dados: " + dados[0] + " " + dados[1]);
   dados3drival(dados);
 });
@@ -54,27 +48,22 @@ function addMessage(e) {
 }
 
 var daditos = 0;
+
 // carga de las funciones del js
 window.onload = function () {
-  
   // coger el boton del dato  
+  var url = document.URL,
+    salatual = url.substr(38,43);
+  
+  socket.emit("room",salatual);
+
   var lanzar_dados = document.getElementById('boton');
 
   // funcion para generar los dados
   var dados;
   lanzar_dados.addEventListener("click", function () {
-    /*
-    if (daditos == 1) {
-      var dice1 = document.getElementById("dice");
-      var dice2 = document.getElementById("dice2");
-      dice1.parentNode.removeChild(dice1);
-      dice2.parentNode.removeChild(dice2);
-      daditos = 0;
-    }*/
-    
     var caca = dados3d(caca);
     dados = Array(caca[0], caca[1]);
-
     socket.emit("dados", dados);
   });
 
@@ -351,8 +340,6 @@ window.onload = function () {
       this.style.opacity = 1;
     }, false);
   */
-
-
 }
 
 

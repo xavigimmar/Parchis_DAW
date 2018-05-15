@@ -4,26 +4,29 @@ var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var rgbHex = require('rgb-hex');
 
-var mensajes = [{ id: 1, texto: "Bienvenido a la Sala", author: "Server"}];
+var mensajes = [{ id: 1, texto: "Bienvenido a la Sala", author: "Server" }];
 //var mensajes;
-var mensajessala1 = [{ id: 1, texto: "Bienvenido a la Sala 1", author: "Server"}];
-var mensajessala2 = [{ id: 1, texto: "Bienvenido a la Sala 2", author: "Server"}];
-var mensajessala3 = [{ id: 1, texto: "Bienvenido a la Sala 3", author: "Server"}];
-var mensajessala4 = [{ id: 1, texto: "Bienvenido a la Sala 4", author: "Server"}];
+var mensajessala1 = [{ id: 1, texto: "Bienvenido a la Sala 1", author: "Server" }];
+var mensajessala2 = [{ id: 1, texto: "Bienvenido a la Sala 2", author: "Server" }];
+var mensajessala3 = [{ id: 1, texto: "Bienvenido a la Sala 3", author: "Server" }];
+var mensajessala4 = [{ id: 1, texto: "Bienvenido a la Sala 4", author: "Server" }];
 
-var salas = ["Sala 1","Sala 2","Sala 3","Sala 4"];
+var salaactual;
+var salas = ["Sala1", "Sala2", "Sala3", "Sala4"];
 
 app.use(express.static('public'));
 
 app.get('/jugar', function (req, res) {
+  /*console.log(req.body);
+  salaactual = req.params;*/
   var directorio = __dirname;
-  directorio = directorio.substr(0,55) + '/public/parchis.html';
+  directorio = directorio.substr(0, 55) + '/public/parchis.html';
   res.sendFile(directorio);
 });
 
 app.get('/salas', function (req, res) {
   var directorio = __dirname;
-  directorio = directorio.substr(0,55) + '/public/salas.html';
+  directorio = directorio.substr(0, 55) + '/public/salas.html';
   res.sendFile(directorio);
   //res.sendFile( __dirname +  '/public/salas.html');
 });
@@ -34,7 +37,7 @@ io.on('connection', function (socket) {
 
   socket.emit("salas", salas);
 
-  socket.on("room",function(sala){
+  socket.on("room", function (sala) {
     socket.join(sala);
     console.log("Se ha conectado a la sala " + sala + "");
   });
@@ -42,8 +45,8 @@ io.on('connection', function (socket) {
   socket.on("new-message", function (comentarios) {
     mensajes.push(comentarios);
     console.log("envio los mensajes del server");
-    //socket.broadcast.in(getRoom(socket)).emit('messages', mensajes);
-    io.sockets.emit("messages", mensajes);
+    socket.broadcast.in(getRoom(socket)).emit('messages', mensajes);
+    //io.sockets.emit("messages", mensajes);
   });
 
   socket.on("dados", function (dados) {
@@ -65,7 +68,7 @@ io.on('connection', function (socket) {
     io.sockets.emit("muevoficha", fichasamover)
   });
 
-  socket.on('disconnect',function(){
+  socket.on('disconnect', function () {
     console.log("Se ha desconectado");
   });
 
@@ -75,23 +78,12 @@ server.listen(9090, function () {
   console.log("Servidor iniciado por el pueto http://localhost:9090");
 });
 
-function getRoom(socket){
-  var count = 0;function getRoom(socket){
-    var count = 0;
-    var identifi = socket.id;
-    var rooms = socket.adapter.sids[identifi];
-    for(var room in rooms){
-      if(count == 1) {
-        return room;
-      }
-      count++;
-    }
-  }
+function getRoom(socket) {
+  var count = 0;
   var identifi = socket.id;
   var rooms = socket.adapter.sids[identifi];
-  console.log(rooms);
-  for(var room in rooms){
-    if(count == 1) {
+  for (var room in rooms) {
+    if (count == 1) {
       return room;
     }
     count++;

@@ -15,7 +15,7 @@ window.onload = function(){
             .attr("value", elementos)
             .html(elementos);
         }  
-        console.log("AAAAA");
+        /*
         d3.selectAll("input").each(function (e,i){
             d3.select(this).on("click",function(){
                 var sala = d3.select(this).attr("name");
@@ -23,6 +23,6 @@ window.onload = function(){
                 socket.emit("room",sala);
             });
         });
-        console.log("BEEEE");
+        */
     });
 }
