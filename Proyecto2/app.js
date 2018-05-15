@@ -27,27 +27,22 @@ app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
 });
 
 app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
-
-        /*if(mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass)) {
-            res.json({"respuesta": true});
-        } else {
-            res.json({"respuesta": false});
-        }*/
-
-    /*var insertar = mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
-    if(insertar){
-        res.json({"respuesta": true});
-    } else {
-        res.json({"respuesta": false});
-    }*/
-    //res.sendFile( __dirname + '/views/index.html');
-
-    //console.log(mongo.comprobarNick(req.query.usuario));
     mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass).then(function(insertar) {
         console.log('Insertado: ' + insertar);
         res.send(insertar);
     });
-    
+});
+
+app.get('/entrar', function(req, res) { // LOGIN DE USUARIO
+    mongo.login(req.query.nombre, req.query.pass).then(function(resultado) {
+        if(resultado === true) {
+            // REDIRECCIONAR A LA PÁGINA PRINCIPAL CON LA SESIÓN INICIADA
+            //res.sendFile( __dirname + '/views/index.html');
+            console.log('Se loguea');
+        } else {
+            console.log('No se loguea');
+        }
+    });
 });
 
 // Conexión de un nuevo socket

@@ -4,17 +4,18 @@
     <title>Parchís - Iniciar Sesión</title>
     <!--<script src="/socket.io/socket.io.js"></script>-->
     <!--<script src="client.js"></script>-->
-    <script type="text/javascript" src="js/events.js"></script>
+    <!--<script type="text/javascript" src="js/events.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="js/login.js"></script>
   </head>
   <body>
     <div id="contenedorLogin">
         <img id="logoParchis" class="img-responsive" src="img/logoParchis7.png" /><br /><br />
         <h3 id="titleLogin">Iniciar sesión</h3>
 
-        <form id="formLogin" method="post" class="form-group">
+        <form id="formLogin" method="get" class="form-group">
 
           <div class="input-group">
             <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -28,12 +29,15 @@
           </div>
           <br />
           <input id="enviar" type="button" class="form-control" value="Entrar" />
-        </form>
+        <span id="mensajeLogin"></span>
         
+        <br />
         <div id="registrarse">
           No estás registrado? <a href="/signup">Regístrate</a>
         </div>
+
+      </form>
     </div>
   </body>
-  <script src="js/login.js"></script>
+  
 </html>

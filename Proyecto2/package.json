@@ -10,6 +10,8 @@
   "author": "Xavi Giménez y Sara Garcia",
   "license": "ISC",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "mongodb": "^3.0.7",
     "socket.io": "^2.1.0"

@@ -6,9 +6,6 @@
 //                                                            //
 ////////////////////////////////////////////////////////////////
 
-
-    
-
 window.onload = () => {
    
     var registrarse = document.getElementById("register");
@@ -18,23 +15,6 @@ window.onload = () => {
         msgPass = document.getElementById("messagePass");
 
     registrarse.addEventListener("click", registro);
-    //registrarse.addEventListener("click", validarDatos);
-
-    /*if(msgUsuario != "" || msgEmail != "" || msgPass != "") { // Si no está vacío
-        msgUsuario.style.background = "#ff6868";
-        msgUsuario.style.fontSize = "11px";
-        msgUsuario.style.borderRadius = "3px";
-        //msgUsuario.style.width = "400px";
-        //msgUsuario.style.padding = "5px";
-        msgUsuario.style.width = "500px";
-    } else {
-        msgUsuario.style.background = "none";
-        msgUsuario.style.fontSize = "none";
-        msgUsuario.style.borderRadius = "none";
-        msgUsuario.style.width = "0";
-        //msgUsuario.style.padding = "5px";
-        msgUsuario.innerHTML = "";
-    }*/
 
     // MOSTRAR / OCULTAR CONTRASEÑAS
     var showPass = document.getElementById("show-hide-passwd");
@@ -67,9 +47,13 @@ window.onload = () => {
             msgCorreo = document.getElementById("messageEmail"),
             msgPass = document.getElementById("messagePass");
 
-        // Test usuario
+        // Test nombre de usuario
         if(usuario == "" || usuario.length == 0 || /^\s+$/.test(usuario)) {
             msgUsuario.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. El campo usuario no puede estar vacío ni contener solo espacios en blanco</div>';
+            document.getElementById("userRegister").focus();
+            return false;
+        } else if(usuario != usuario.toLowerCase() /*&& usuario != usuario.toUpperCase()*/) {
+            msgUsuario.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. El nombre solo puede estar en minúsculas</div>';
             document.getElementById("userRegister").focus();
             return false;
         }
@@ -138,6 +122,7 @@ window.onload = () => {
                 }
             });
         }
+
         
     }
 
