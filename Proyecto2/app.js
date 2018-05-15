@@ -27,15 +27,12 @@ app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
 });
 
 app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
-    //if(mongo.comprobarNick(req.query.usuario)) {
+
         /*if(mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass)) {
             res.json({"respuesta": true});
         } else {
             res.json({"respuesta": false});
         }*/
-    /*} else {
-        res.json({"respuesta": false});
-    }*/
 
     /*var insertar = mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
     if(insertar){
@@ -46,8 +43,11 @@ app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
     //res.sendFile( __dirname + '/views/index.html');
 
     //console.log(mongo.comprobarNick(req.query.usuario));
-    var insertar = mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass);
-    console.log('Insertado?: ' + insertar);
+    mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass).then(function(insertar) {
+        console.log('Insertado: ' + insertar);
+        res.send(insertar);
+    });
+    
 });
 
 // Conexión de un nuevo socket
