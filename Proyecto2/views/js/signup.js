@@ -20,7 +20,7 @@ window.onload = () => {
     registrarse.addEventListener("click", registro);
     //registrarse.addEventListener("click", validarDatos);
 
-    if(msgUsuario != "" || msgEmail != "" || msgPass != "") { // Si no está vacío
+    /*if(msgUsuario != "" || msgEmail != "" || msgPass != "") { // Si no está vacío
         msgUsuario.style.background = "#ff6868";
         msgUsuario.style.fontSize = "11px";
         msgUsuario.style.borderRadius = "3px";
@@ -34,7 +34,7 @@ window.onload = () => {
         msgUsuario.style.width = "0";
         //msgUsuario.style.padding = "5px";
         msgUsuario.innerHTML = "";
-    }
+    }*/
 
     // MOSTRAR / OCULTAR CONTRASEÑAS
     var showPass = document.getElementById("show-hide-passwd");
@@ -69,47 +69,40 @@ window.onload = () => {
 
         // Test usuario
         if(usuario == "" || usuario.length == 0 || /^\s+$/.test(usuario)) {
-            msgUsuario.innerHTML = 'Error. El campo usuario no puede estar vacío ni contener solo espacios en blanco';
+            msgUsuario.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. El campo usuario no puede estar vacío ni contener solo espacios en blanco</div>';
             document.getElementById("userRegister").focus();
             return false;
         }
 
         // Test correo
         if(correo == "" || correo.length == 0 || !(/\S+@\S+\.\S+/.test(correo))){
-            msgCorreo.innerHTML = 'Error. Debe escribir un correo válido';
+            msgCorreo.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. Debe escribir un correo válido</div>';
             document.getElementById("emailRegister").focus();
 			return false;
         }
         
         // Test contraseñas
-        //if(pass.length != 0 && pass2.length != 0) {
-            //console.log(pass);
+        if(pass.length != 0 && pass2.length != 0 || pass.length != 0 || pass2.length != 0 /*|| (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(pass) || (/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/.test(pass2)*/) {
             if(pass != pass2) {
-                msgPass.innerHTML = 'Error. Las contraseñas no coinciden';
+                msgPass.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. Las contraseñas no coinciden</div>';
+                document.getElementById("passwordRegister").focus();
+                document.getElementById("passwordRegister2").focus();
+                return false;
+            } else if(pass.length < 8 || pass2.length < 8) {
+                msgPass.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. Las contraseñas deben tener mínimo 8 caracteres</div>';
                 document.getElementById("passwordRegister").focus();
                 document.getElementById("passwordRegister2").focus();
                 return false;
             }
-        //}
+        } else {
+            msgPass.innerHTML = '<div style=color:red;margin-left:86px;font-size:11px>Error. No puedes dejar la contraseña vacía</div>';
+            document.getElementById("passwordRegister").focus();
+            document.getElementById("passwordRegister2").focus();
+            return false;
+        }
         
         return true;
     }
-
-    /* COMPROBACIÓN DE NICK DE USUARIO */
-    /*function comprobarNick(usuario) {
-        var MongoClient = require('mongodb').MongoClient;
-        var url = "mongodb://localhost:27017/";
-
-        MongoClient.connect(url, function(err, db) {
-            if (err) throw err;
-            var dbo = db.db("parchis");
-            dbo.collection("usuarios").find({"user":usuario}, function(err, result) {
-              if (err) throw err;
-              console.log(result);
-              db.close();
-            });
-        }); 
-    }*/
 
     /* REGISTRO */
     function registro(e) {
@@ -118,39 +111,32 @@ window.onload = () => {
             pass = document.getElementById("passwordRegister").value,
             pass2 = document.getElementById("passwordRegister2").value;
 
-        if(validarDatos()) { // Si la validación del form es correcta
-            //if(pass == pass2) { // Si las contraseñas coinciden    
-            //e.preventDefault(); // no redirigir ya que submit lo hace
-            //if(mongo.comprobarNick(usuario)) {
-                console.log("validación correcta");
-                $.ajax({
-                    url: '/profile',
-                    data: { usuario: usuario, correo: correo, pass: pass },
-                    type: 'GET',
-    
-                    success: function (json) {
-                        /*if(json.respuesta == true) {
-                            console.log('Todo correcto');
-                        } else {
-                            console.log("hay algo incorrecto");
-                        }*/
-                        console.log("hola");
-                    },
-    
-                    error: function (xhr, status) {
-                        console.log('Ha habido un problema con el registro');
-                    }
-                });
+        // Mensajes de cada campo
+        var msgUsuario = document.getElementById("messageUser"),
+            msgCorreo = document.getElementById("messageEmail"),
+            msgPass = document.getElementById("messagePass");
 
-                //console.log("Las contraseñas coinciden");
-            /*} else {
-                console.log('El nombre de usuario ya existe');
-            }*/
-    
-                //document.getElementById("message").innerHTML = "coinciden";
-            //} else {
-                //console.log("Las contraseñas no coinciden");
-            //}
+        if(validarDatos()) { // Si la validación del form es correcta    
+            e.preventDefault(); // no redirigir ya que submit lo hace
+                
+            // Limpiar campos de error
+            msgUsuario.innerHTML = "";
+            msgCorreo.innerHTML = "";
+            msgPass.innerHTML = "";
+            //console.log("validación correcta");
+            $.ajax({    // AJAX
+                url: '/profile',
+                data: { usuario: usuario, correo: correo, pass: pass },
+                type: 'GET',
+
+                success: function (respuesta) {
+                    console.log('Respuesta: ' + respuesta);
+                },
+
+                error: function (xhr, status) {
+                    console.log('Ha habido un problema con el registro');
+                }
+            });
         }
         
     }
