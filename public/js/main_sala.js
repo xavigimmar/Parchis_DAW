@@ -3,34 +3,26 @@ var socket = io.connect();
 window.onload = function(){
 
     socket.on("salas",function(salas){
-        var div = d3.select("#salas");
+        var inputs = d3.select("#ajugar");
 
-        d3.selectAll("p").remove();
+        d3.selectAll("input").remove();
         
         for(var elementos of salas){
-            var chart = div.append("p")
-            .attr("id", elementos)
+            var chart = inputs.append("input")
+            .attr("class", "botonjugar")
+            .attr("type", "submit")
+            .attr("name", elementos)
+            .attr("value", elementos)
             .html(elementos);
         }  
-
-        d3.selectAll("p").each(function (e,i){
+        /*
+        d3.selectAll("input").each(function (e,i){
             d3.select(this).on("click",function(){
-                var join = d3.select(this).attr("id");
-                console.log(join);
-                socket.emit("room",join);
+                var sala = d3.select(this).attr("name");
+                console.log("name de la sala: " + sala);
+                socket.emit("room",sala);
             });
         });
+        */
     });
-
-    
-    /*
-    p
-        .selectAll('*[id^="sala"]')
-        .on("click", function(){
-            sala = d3.select(this).attr("id");
-            console.log(sala);
-        });
-    
-       console.log(body);
-    */  
 }

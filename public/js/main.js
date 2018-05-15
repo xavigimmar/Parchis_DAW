@@ -1,4 +1,5 @@
 var socket = io.connect();
+//var socket = io.connect('http://192.168.12.83:9090/', { 'forceNew': true });
 
 // renderizado de los mensajes del chat
 socket.on('messages', function (data) {
@@ -8,20 +9,20 @@ socket.on('messages', function (data) {
 
 // Incustacion de los dados aleatorios en el titulo
 socket.on("actualizartitulo", function (dados) {
+  console.log("Actualizo los dados");
+  //document.getElementById('h1').innerHTML = "Parchís " + " - " + socketreturn + " "+ dados[0] + " " + dados[1];
   document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
-
-  var dice1 = document.getElementById("dice");
-  var dice2 = document.getElementById("dice2");
-  dice1.parentNode.removeChild(dice1);
-  dice2.parentNode.removeChild(dice2);
+  console.log("actualizacion de los dados: " + dados[0] + " " + dados[1]);
   dados3drival(dados);
 });
 
 // mensaje de alerta de cuando se conecta un usuario a la partida
 socket.emit('conectado');
+
+/*
 socket.on("hola", function () {
   alert("Hola me he conectado a tu partida");
-});
+});*/
 
 // funcion de añadir mensajes al array del chat
 function render(data) {
@@ -45,32 +46,24 @@ function addMessage(e) {
   socket.emit("new-message", mensaje);
   return false;
 }
+
 var daditos = 0;
+
 // carga de las funciones del js
 window.onload = function () {
-
   // coger el boton del dato  
-  var lanzar_dados = document.getElementById('boton');
+  var url = document.URL,
+    salatual = url.substr(38,43);
+  
+  socket.emit("room",salatual);
 
+  var lanzar_dados = document.getElementById('boton');
 
   // funcion para generar los dados
   var dados;
   lanzar_dados.addEventListener("click", function () {
-    /*
-    var numran1 = Math.round(Math.random() * 5) + 1;
-    var numran2 = Math.round(Math.random() * 5) + 1;*/
-    console.log(daditos);
-    if (daditos == 1) {
-      var dice1 = document.getElementById("dice");
-      var dice2 = document.getElementById("dice2");
-      dice1.parentNode.removeChild(dice1);
-      dice2.parentNode.removeChild(dice2);
-      daditos = 0;
-    }
-
     var caca = dados3d(caca);
-    dados = Array(caca[0], caca[1], daditos);
-
+    dados = Array(caca[0], caca[1]);
     socket.emit("dados", dados);
   });
 
@@ -110,11 +103,11 @@ window.onload = function () {
 
       if (colorfich != "#ffffff") {
         var num = idficha.charAt(6) + idficha.charAt(7);
-        console.log(num);
+        //console.log(num);
         if (isNaN(num)) {
           num = idficha.charAt(10) + idficha.charAt(11);
         }
-        console.log(num);
+        //console.log(num);
 
         var mouse = d3.select(this).attr("id");
         var temp1 = parseInt(num) + dados[0],
@@ -347,8 +340,6 @@ window.onload = function () {
       this.style.opacity = 1;
     }, false);
   */
-
-
 }
 
 
