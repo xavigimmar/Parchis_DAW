@@ -6,10 +6,10 @@ var rgbHex = require('rgb-hex');
 
 var mensajes = [{ id: 1, texto: "Bienvenido a la Sala", author: "Server" }];
 //var mensajes;
-var mensajessala1 = [{ id: 1, texto: "Bienvenido a la Sala 1", author: "Server" }];
-var mensajessala2 = [{ id: 1, texto: "Bienvenido a la Sala 2", author: "Server" }];
-var mensajessala3 = [{ id: 1, texto: "Bienvenido a la Sala 3", author: "Server" }];
-var mensajessala4 = [{ id: 1, texto: "Bienvenido a la Sala 4", author: "Server" }];
+var mensajesSala1 = [{ id: 1, texto: "Bienvenido a la Sala 1", author: "Server" }];
+var mensajesSala2 = [{ id: 1, texto: "Bienvenido a la Sala 2", author: "Server" }];
+var mensajesSala3 = [{ id: 1, texto: "Bienvenido a la Sala 3", author: "Server" }];
+var mensajesSala4 = [{ id: 1, texto: "Bienvenido a la Sala 4", author: "Server" }];
 
 var salaactual;
 var salas = ["Sala1", "Sala2", "Sala3", "Sala4"];
@@ -43,16 +43,22 @@ io.on('connection', function (socket) {
   });
 
   socket.on("new-message", function (comentarios) {
+    if(getRoom(socket) == "Sala1") mensajes = mensajesSala1;
+    if(getRoom(socket) == "Sala2") mensajes = mensajesSala2;
+    if(getRoom(socket) == "Sala3") mensajes = mensajesSala3;
+    if(getRoom(socket) == "Sala4") mensajes = mensajesSala4;
+    
     mensajes.push(comentarios);
     console.log("envio los mensajes del server");
-    socket.broadcast.in(getRoom(socket)).emit('messages', mensajes);
+    io.sockets.in(getRoom(socket)).emit('messages', mensajes);
     //io.sockets.emit("messages", mensajes);
   });
 
   socket.on("dados", function (dados) {
     console.log(dados[0], dados[1]);
-    io.sockets.emit("actualizartitulo", dados);
+    io.sockets.in(getRoom(socket)).emit("actualizartitulo", dados, getRoom(socket));
   });
+
 
   socket.on("rgbTohx", function (color) {
     var hx = "#" + rgbHex(color);
@@ -65,7 +71,8 @@ io.on('connection', function (socket) {
 
   socket.on("movimiento", function (fichasamover) {
     console.log("He recivido un movimiento");
-    io.sockets.emit("muevoficha", fichasamover)
+    //io.sockets.emit("muevoficha", fichasamover);
+    io.sockets.in(getRoom(socket)).emit("muevoficha", fichasamover);
   });
 
   socket.on('disconnect', function () {
@@ -83,9 +90,8 @@ function getRoom(socket) {
   var identifi = socket.id;
   var rooms = socket.adapter.sids[identifi];
   for (var room in rooms) {
-    if (count == 1) {
-      return room;
-    }
+    //console.log(room);
+    if (count == 1) return room;
     count++;
   }
 }

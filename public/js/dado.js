@@ -1,5 +1,4 @@
 function dados3d(caca) {
-  console.log("entro en tirar dados");
   var caca = [];
 
   daditos = 1;
@@ -97,14 +96,13 @@ function dados3d(caca) {
 
   dice.roll();
   dice2.roll();
-  console.log("los dados valen " + caca);
+
   return caca;
 }
 
 
 function dados3drival(dados) {
   var caca = [];
-  console.log("entro en tirar dados del rival");
   daditos = 1;
   //console.log(daditos);
   var debug = false;
@@ -200,6 +198,6 @@ function dados3drival(dados) {
 
   dice.roll();
   dice2.roll();
-  console.log("dados del rival" + caca);
+
   return caca;
 }

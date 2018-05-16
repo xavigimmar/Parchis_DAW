@@ -8,11 +8,8 @@ socket.on('messages', function (data) {
 });
 
 // Incustacion de los dados aleatorios en el titulo
-socket.on("actualizartitulo", function (dados) {
-  console.log("Actualizo los dados");
-  //document.getElementById('h1').innerHTML = "Parchís " + " - " + socketreturn + " "+ dados[0] + " " + dados[1];
-  document.getElementById('h1').innerHTML = "Parchís " + dados[0] + " " + dados[1];
-  console.log("actualizacion de los dados: " + dados[0] + " " + dados[1]);
+socket.on("actualizartitulo", function (dados, room) {
+  document.getElementById('h1').innerHTML = "Parchís " + " - " + room + " (" + dados[0] + "," + dados[1] + ")";
   dados3drival(dados);
 });
 
@@ -53,10 +50,10 @@ var daditos = 0;
 window.onload = function () {
   // coger el boton del dato  
   var url = document.URL,
-    salatual = url.substr(38,43);
-  
-  socket.emit("room",salatual);
+    salatual = url.substr(38, 43);
 
+  socket.emit("room", salatual);
+  var sala;
   var lanzar_dados = document.getElementById('boton');
 
   // funcion para generar los dados
@@ -168,13 +165,6 @@ window.onload = function () {
 
         // condicion si el array ya tiene una ficha
         if (fichasamover.length == 1) {
-          /*
-          var solo1 = "#ficha" + temp1 + "-1";
-          var solo2 = "#ficha" + temp2 + "-1";
-          var solo3 = "#ficha" + temp3 + "-1";
-          //if(id != )
-          console.log(solo1);
-          */
           var ficha2 = new Object();
           ficha2.id = id;
           ficha2.fill = relleno;
@@ -195,9 +185,9 @@ window.onload = function () {
       }
 
       // hacer el movimiento cuando ya has seleccionado 2 fichas
-      if (fichasamover.length == 2) {
+      if (fichasamover.length == 2) {//salatual
         socket.emit("movimiento", fichasamover);
-        var mover = moverfichas(fichasamover);
+        //moverfichas(fichasamover);
         fichasamover = [];
       }
     }
@@ -244,11 +234,12 @@ window.onload = function () {
       }
 
       if (idficha2.charAt(idficha2.length - 1) != 2) {
-        pos3 = idficha2.substr(0, idficha2.length - 1) + "3";
-        pos2 = idficha2.substr(0, idficha2.length - 1) + "2";
-        pos1 = idficha2.substr(0, idficha2.length - 1) + "1";
+        pos33 = idficha2.substr(0, idficha2.length - 1) + "3";
+        pos22 = idficha2.substr(0, idficha2.length - 1) + "2";
+        pos11 = idficha2.substr(0, idficha2.length - 1) + "1";
+        console.log("La segunda ficha no es la del medio");
 
-        var fichacentral = svg.select(pos2);
+        var fichacentral = svg.select(pos22);
         var ocupada = fichacentral.attr('style');
 
         var color = "";
@@ -257,24 +248,28 @@ window.onload = function () {
         }
 
         if (color == "#ffffff") {
-          idficha2 = pos2;
-        }
-        if (color == "#D64949") {
-          idficha2 = idficha1;
-          alert("no puedes pasar");
-        }
-        if (color == fichas[0].fill) {
-          var fichaabajo = svg.select(pos1).attr('style');
+          console.log("La posicon del medio esta libre");
+          idficha2 = pos22;
+        } else if (color != "#ffffff" || (pos33 == fichas[0].fill && pos11 == fichas[0].fill)) {
+          console.log("hay un puente y no puedes mover");
+          alert("hay un pueste, imposible mover");
+          idficha2 = idficha1;      
+        } else if (color == fichas[0].fill) {
+          console.log("la ficha 2 es del mismo color que la primera");
+          var fichaarriba = svg.select(pos33).attr('style');
+          var fichaarribacolor = fichaarriba.replace(r, colorficha1);
+          fichaarribacolormostrar = fichaarribacolor.replace(r1, "opacity:1");
+          svg.select(pos33).attr('style', fichaarribacolormostrar);
+
+          var fichamedio = svg.select(pos22).attr('style');
+          var fichamedioblanca = fichamedio.replace(r, "fill:#f7f2f2");
+          fichamedioblancapaca = fichamedioblanca.replace(r1, "opacity:0");
+          svg.select(pos22).attr('style', fichamedioblancapaca);
+
+          var fichaabajo = svg.select(pos11).attr('style');
           var fichaabajocolor = fichaabajo.replace(r, colorficha1);
           fichaabajocolormostrar = fichaabajocolor.replace(r1, "opacity:1");
-          svg.select(pos3).attr('style', fichaabajocolormostrar);
-
-          var fichamedio = svg.select(pos2).attr('style');
-          var fichamedioblanca = fichamedio.replace(r, "fill:#ffffff");
-          fichamedioblancapaca = fichamedioblanca.replace(r1, "opacity:0");
-          svg.select(pos2).attr('style', fichamedioblancapaca);
-
-          idficha2 = pos1;
+          svg.select(pos11).attr('style', fichaabajocolormostrar);
 
           new_puente = new Object();
           new_puente.color = fichas[0].fill;
@@ -309,8 +304,6 @@ window.onload = function () {
           console.log("esta");
         }
       }*/
-
-
     }
   }
 
