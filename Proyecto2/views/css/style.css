@@ -105,3 +105,13 @@ body {
     width: 100%;
     max-width: 250px;
 }
+
+#contenedorIndex {
+    position: relative;
+    text-align: center;
+    top: 20px;
+}
+
+#contenedorIndex #textoencima {
+    position: absolute;
+}
