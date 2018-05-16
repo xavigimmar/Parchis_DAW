@@ -51,8 +51,9 @@ io.on('connection', function (socket) {
 
   socket.on("dados", function (dados) {
     console.log(dados[0], dados[1]);
-    io.sockets.emit("actualizartitulo", dados);
+    io.sockets.emit("actualizartitulo", dados, getRoom(socket));
   });
+
 
   socket.on("rgbTohx", function (color) {
     var hx = "#" + rgbHex(color);
@@ -65,7 +66,7 @@ io.on('connection', function (socket) {
 
   socket.on("movimiento", function (fichasamover) {
     console.log("He recivido un movimiento");
-    io.sockets.emit("muevoficha", fichasamover)
+    io.sockets.emit("muevoficha", fichasamover);
   });
 
   socket.on('disconnect', function () {
@@ -83,9 +84,8 @@ function getRoom(socket) {
   var identifi = socket.id;
   var rooms = socket.adapter.sids[identifi];
   for (var room in rooms) {
-    if (count == 1) {
-      return room;
-    }
+    //console.log(room);
+    if (count == 1) return room;
     count++;
   }
 }
