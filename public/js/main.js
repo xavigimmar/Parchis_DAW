@@ -185,8 +185,9 @@ window.onload = function () {
       }
 
       // hacer el movimiento cuando ya has seleccionado 2 fichas
-      if (fichasamover.length == 2) {
+      if (fichasamover.length == 2) {//salatual
         socket.emit("movimiento", fichasamover);
+        //moverfichas(fichasamover);
         fichasamover = [];
       }
     }
