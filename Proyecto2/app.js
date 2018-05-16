@@ -26,23 +26,26 @@ app.get('/signup', function(req, res) { // REDIRECCIÓN A REGISTRO
     res.sendFile( __dirname + '/views/signup.html');
 });
 
-app.get('/profile', function(req, res) { // REGISTRO DE USUARIO
+app.get('/profile', function(req, res) { // REGISTRO DE USUARIO RECIBIENDO AJAX
     mongo.insertarMongo(req.query.usuario, req.query.correo, req.query.pass).then(function(insertar) {
-        console.log('Insertado: ' + insertar);
+        //console.log('Insertado: ' + insertar);
         res.send(insertar);
     });
 });
 
-app.get('/entrar', function(req, res) { // LOGIN DE USUARIO
+app.get('/entrar', function(req, res) { // LOGIN DE USUARIO RECIBIENDO AJAX
     mongo.login(req.query.nombre, req.query.pass).then(function(resultado) {
-        if(resultado === true) {
-            // REDIRECCIONAR A LA PÁGINA PRINCIPAL CON LA SESIÓN INICIADA
-            //res.sendFile( __dirname + '/views/index.html');
+        /*if(resultado === true) {
             console.log('Se loguea');
         } else {
             console.log('No se loguea');
-        }
+        }*/
+        res.send(resultado);
     });
+});
+
+app.get('/salir', function(req, res) { // CERRAR SESIÓN
+    res.sendFile( __dirname + '/views/cerrarSesion.html');
 });
 
 // Conexión de un nuevo socket
