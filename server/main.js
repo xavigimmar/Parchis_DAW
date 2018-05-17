@@ -3,18 +3,45 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var rgbHex = require('rgb-hex');
+var _eval = require('eval');
 
 var mensajes = [{ id: 1, texto: "Bienvenido a la Sala", author: "Server" }];
 //var mensajes;
-var mensajesSala1 = [{ id: 1, texto: "Bienvenido a la Sala 1", author: "Server" }];
-var mensajesSala2 = [{ id: 1, texto: "Bienvenido a la Sala 2", author: "Server" }];
-var mensajesSala3 = [{ id: 1, texto: "Bienvenido a la Sala 3", author: "Server" }];
-var mensajesSala4 = [{ id: 1, texto: "Bienvenido a la Sala 4", author: "Server" }];
+var mensajesSala1 = [{ texto: "Bienvenido a la Sala 1", author: "Server" }],
+  mensajesSala2 = [{ texto: "Bienvenido a la Sala 2", author: "Server" }],
+  mensajesSala3 = [{ texto: "Bienvenido a la Sala 3", author: "Server" }],
+  mensajesSala4 = [{ texto: "Bienvenido a la Sala 4", author: "Server" }];
+
+var salasuser = {};
+
+// azul: #3831eb      rojo: #a11f1f  
+// amarillo: #e8c45e  verde: #188300
+var contadoresSalas = new Map();
+contadoresSalas.set("Sala1", 0);
+contadoresSalas.set("Sala2", 0);
+contadoresSalas.set("Sala3", 0);
+contadoresSalas.set("Sala4", 0);
+
+var participantesSala1 = new Map(),
+  participantesSala2 = new Map(),
+  participantesSala3 = new Map(),
+  participantesSala4 = new Map();
+
+participantesSala1.set('#3831eb', "").set('#188300', "");
+participantesSala2.set('#3831eb', "").set('#188300', "");
+participantesSala3.set('#3831eb', "").set('#188300', "");
+participantesSala4.set('#3831eb', "").set('#188300', "");
 
 var salaactual;
 var salas = ["Sala1", "Sala2", "Sala3", "Sala4"];
 
 app.use(express.static('public'));
+
+app.get('/', function (req, res) {
+  var directorio = __dirname;
+  directorio = directorio.substr(0, 55) + '/public/salas.html';
+  res.sendFile(directorio);
+});
 
 app.get('/jugar', function (req, res) {
   /*console.log(req.body);
@@ -39,15 +66,61 @@ io.on('connection', function (socket) {
 
   socket.on("room", function (sala) {
     socket.join(sala);
+
+    salasuser[socket.id] = sala;
+    //console.log(salasuser);
+
+    if (sala == "Sala1") {
+      var keys = Array.from(participantesSala1.keys());
+      //console.log(keys);
+      var cont = contadoresSalas.get('Sala1');
+      participantesSala1.set(keys[cont], socket.id);
+      cont++;
+      contadoresSalas.set('Sala1', cont);
+      //console.log(participantesSala1);
+    }
+    if (sala == "Sala2") {
+      var keys = Array.from(participantesSala2.keys());
+      //console.log(keys);
+      var cont = contadoresSalas.get('Sala2');
+      participantesSala2.set(keys[cont], socket.id);
+      cont++;
+      contadoresSalas.set('Sala2', cont);
+      //console.log(participantesSala2);
+    }
+    if (sala == "Sala3") {
+      var keys = Array.from(participantesSala3.keys());
+      //console.log(keys);
+      var cont = contadoresSalas.get('Sala3');
+      participantesSala3.set(keys[cont], socket.id);
+      cont++;
+      contadoresSalas.set('Sala3', cont);
+      //console.log(contadoresSalas);
+    }
+    if (sala == "Sala4") {
+      var keys = Array.from(participantesSala4.keys());
+      console.log("--ides de la sala: " + keys);
+      var cont = contadoresSalas.get('Sala4');
+      console.log("---personas en la sala: " + cont);
+      participantesSala4.set(keys[cont], socket.id);
+      console.log("----añade persona a la sala: ");
+      console.log(participantesSala4);
+      cont++;
+      console.log("-----suma 1 al contador: " + cont);
+      contadoresSalas.set('Sala4', cont);
+      console.log("-------valor de la sala: ");
+      console.log(contadoresSalas);
+    }
+
     console.log("Se ha conectado a la sala " + sala + "");
   });
 
   socket.on("new-message", function (comentarios) {
-    if(getRoom(socket) == "Sala1") mensajes = mensajesSala1;
-    if(getRoom(socket) == "Sala2") mensajes = mensajesSala2;
-    if(getRoom(socket) == "Sala3") mensajes = mensajesSala3;
-    if(getRoom(socket) == "Sala4") mensajes = mensajesSala4;
-    
+    if (getRoom(socket) == "Sala1") mensajes = mensajesSala1;
+    if (getRoom(socket) == "Sala2") mensajes = mensajesSala2;
+    if (getRoom(socket) == "Sala3") mensajes = mensajesSala3;
+    if (getRoom(socket) == "Sala4") mensajes = mensajesSala4;
+
     mensajes.push(comentarios);
     console.log("envio los mensajes del server");
     io.sockets.in(getRoom(socket)).emit('messages', mensajes);
@@ -76,6 +149,48 @@ io.on('connection', function (socket) {
   });
 
   socket.on('disconnect', function () {
+    console.log(salasuser);
+    var usersal = salasuser[socket.id];
+    console.log("--sala del socket(usersal): " + usersal);
+    var cont = contadoresSalas.get(usersal);
+    console.log("---personas en la sala: " + cont);
+    cont--;
+    console.log("-----resta 1 al contador: " + cont);
+    contadoresSalas.set(usersal, cont);
+    console.log("-------valor de la sala: ");
+    console.log(contadoresSalas);
+
+    delete salasuser[socket.id];
+    console.log(participantesSala4);
+    var keysalas;
+    if(usersal == "Sala1") {
+      keysalas = Array.from(participantesSala1.keys()); 
+      for(let key of keysalas){
+        if(participantesSala1.get(key) == socket.id) participantesSala1.set(key,""); 
+      }
+    }
+    if(usersal == "Sala2") {
+      keysalas = Array.from(participantesSala2.keys()); 
+      for(let key of keysalas){
+        if(participantesSala2.get(key) == socket.id) participantesSala2.set(key,""); 
+      }
+    }
+    if(usersal == "Sala3") {
+      keysalas = Array.from(participantesSala3.keys()); 
+      for(let key of keysalas){
+        if(participantesSala3.get(key) == socket.id) participantesSala3.set(key,""); 
+      }
+    }
+    if(usersal == "Sala4") {
+      keysalas = Array.from(participantesSala4.keys()); 
+      for(let key of keysalas){
+        if(participantesSala4.get(key) == socket.id) participantesSala4.set(key,""); 
+      }
+    } 
+
+    console.log(keysalas);
+    console.log(participantesSala4);
+    //var test = salasuser.getkey();
     console.log("Se ha desconectado");
   });
 
