@@ -1,9 +1,11 @@
 @font-face {
-  font-family: font;
-  src: url('Shine Bright - Demo.ttf');
+  font-family: ShineBright;
+  font-style: normal;
+  font-weight: normal;
+  src: url('../ShineBright.ttf');
 }
-svg{
-  font-family: font, fallBackFonts, sans-serif;
+object {
+  font-family: ShineBright, fallBackFonts, sans-serif;
 }
 
 #dado {
