@@ -29,6 +29,19 @@ window.onload = () => {
     enviar.addEventListener("click", login);
 
     // FUNCIONES
+    /* FUNCIÓN PARA MENSAJE DE ERROR SI NO SE LOGUEA CORRECTAMENTE */
+    function datos(logueo) {
+        var msgLogin = document.getElementById("mensajeLogin"),
+            usuario = document.getElementById("usuario").value;
+
+        console.log('Usuario en funcion datos: ' + usuario);
+
+        if(logueo) { // Si se loguea correctamente
+            location.href = "../index.html?user=" + usuario; // Redirecciona a la página principal pasando el nombre de usuario por url
+        } else { // Si no se ha logueado correctamente da mensaje de error
+            msgLogin.innerHTML = "<div style=font-size:11px;color:red;margin-bottom:10px>Usuario o contraseña incorrectos</div>";
+        }
+    }
 
     /* LOGIN */
     function login(e) {
@@ -42,8 +55,7 @@ window.onload = () => {
             type: 'GET',
 
             success: function (json) {
-                console.log(json);
-                if (json) window.location.href = "/"; 
+                datos(json); // Función que gestiona que hacer cuando se intenta loguear
             },
 
             error: function (xhr, status) {
@@ -51,5 +63,7 @@ window.onload = () => {
             }
         });
     }
+
+    
 }   
 

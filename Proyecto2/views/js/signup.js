@@ -35,6 +35,17 @@ window.onload = () => {
 
     // FUNCIONES
 
+    /* GESTIONAR QUE HACER AL REGISTRARSE */
+    function datos(registrarse) {
+        var msgRegistro = document.getElementById("mensajeRegistro");
+
+        if(registrarse) { // Si se registra correctamente
+            msgRegistro.innerHTML = "<div style=font-size:13px;color:green;text-align:center>Registrado correctamente</div>";
+        } else {
+            msgRegistro.innerHTML = "<div style=font-size:13px;color:red;text-align:center>Error. El usuario ya existe</div>";
+        }
+    }
+
     /* VALIDACIÓN */
     function validarDatos() {
         var usuario = document.getElementById("userRegister").value,
@@ -114,7 +125,8 @@ window.onload = () => {
                 type: 'GET',
 
                 success: function (respuesta) {
-                    console.log('Respuesta: ' + respuesta);
+                   //console.log('Respuesta: ' + respuesta);
+                   datos(respuesta);
                 },
 
                 error: function (xhr, status) {
