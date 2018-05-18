@@ -11,7 +11,7 @@
     <!--<script src="js/main_sala.js"></script>-->
     <link href="css/style.css" type="text/css" rel="stylesheet" />
     <link href="css/style_dado.css" type="text/css" rel="stylesheet" />
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.12/jquery.transit.js"></script>
 
@@ -19,29 +19,34 @@
 </head>
 
 <body>
-    <h1 id="h1">Parchís</h1>
-    
-    <div id="dados">
-        <div id="dice"></div>
-        <div id="dice2"></div>
-        <div id="interativo"></div>
-        <div id="interativo1"></div>
+    <div id="todo">
+        <div id="titulo11">
+            <h1 id="h1">Parchís</h1>
+        </div>
+
+        <div id="botton11">
+            <button id="boton" type="button">Dados</button>
+        </div>
+
+        <div id="tablero">
+            <div id="dados">
+                <div id="interativo"></div>
+                <div id="interativo1"></div>
+            </div>
+
+            <object data="parchis_v2.1_acabado.svg" type="image/svg+xml" id="parchis" width="100%" height="100%"></object>
+        </div>
+
+        <div id="chat">
+            <div id="messages"></div>
+            <form onsubmit="return addMessage(this)" id="formulario">
+                <input id="username" type="text" placeholder="Tu nombre">
+                <input id="texto" type="text" placeholder="Cuentanos algo...">
+                <input type="submit" valor="Send">
+            </form>
+        </div>
+
     </div>
-
-    <button id="boton" type="button">Dados</button>
-    <div id="tablero">
-        <object data="parchis_v2.1_acabado.svg" type="image/svg+xml" id="parchis" width="100%" height="100%"></object>
-    </div>
-
-    <div id="messages"></div>
-
-    </br>
-    <form onsubmit="return addMessage(this)">
-        <input id="username" type="text" placeholder="Tu nombre">
-        <input id="texto" type="text" placeholder="Cuentanos algo...">
-        <input type="submit" valor="Send">
-    </form>
-
 </body>
 
 </html>

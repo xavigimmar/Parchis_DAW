@@ -10,7 +10,19 @@ socket.on('messages', function (data) {
 // Incustacion de los dados aleatorios en el titulo
 socket.on("actualizartitulo", function (dados, room) {
   document.getElementById('h1').innerHTML = "Parchís " + " - " + room + " (" + dados[0] + "," + dados[1] + ")";
+  var dice = d3.selectAll("#dice");
+  dice.remove();
+  
+  var dice2 = d3.selectAll("#dice2");
+  dice2.remove();
+  
   dados3drival(dados);
+});
+
+socket.on("borrarsala",function(){
+  console.log(localStorage.getItem("sala"));
+  localStorage.removeItem("sala");
+  console.log(localStorage.getItem("sala"));
 });
 
 // mensaje de alerta de cuando se conecta un usuario a la partida
@@ -48,11 +60,16 @@ var daditos = 0;
 
 // carga de las funciones del js
 window.onload = function () {
-  // coger el boton del dato  
-  var url = document.URL,
-    salatual = url.substr(38, 43);
 
+  // paso la sala por el localstorage
+  salatual = localStorage.getItem("sala");
+
+  var titulo = document.getElementById('h1');
+  titulo.innerHTML = titulo.innerHTML + " - " + salatual;
+
+  // union a la sala que quiere unirse
   socket.emit("room", salatual);
+  
   var sala;
   var lanzar_dados = document.getElementById('boton');
 
@@ -77,7 +94,7 @@ window.onload = function () {
   svg
     .selectAll('*[id^="ficha"]')   // selecciona todos los elementos que empiezen por el id ficha
     .on("mouseover", colorearcasillas) // funcion para iluminar casillas donde puedes poner las fichas
-    .on("click", seleccionarfichas)
+    .on("click", seleccionarfichas) //funcion para seleccionar fichas
     .on("mouseout", descolorearcasillas);
 
 
@@ -253,7 +270,7 @@ window.onload = function () {
         } else if (color != "#ffffff" || (pos33 == fichas[0].fill && pos11 == fichas[0].fill)) {
           console.log("hay un puente y no puedes mover");
           alert("hay un pueste, imposible mover");
-          idficha2 = idficha1;      
+          idficha2 = idficha1;
         } else if (color == fichas[0].fill) {
           console.log("la ficha 2 es del mismo color que la primera");
           var fichaarriba = svg.select(pos33).attr('style');

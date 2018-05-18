@@ -4,28 +4,85 @@
   font-weight: normal;
   src: url('../ShineBright.ttf');
 }
+
+#todo {
+  display: grid;
+  grid-template-areas:
+    'titulo titulo titulo'
+    'boton boton boton'
+    'tablero tablero chat';
+  grid-gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  padding: 10px;
+}
+
 object {
   font-family: ShineBright, fallBackFonts, sans-serif;
 }
 
-#dado {
-	width: 200px;
-  height: 100px;
-  float: left;
+#titulo11{
+  grid-area: titulo;
+  background: #f6f8ac;
 }
 
-#tablero{
-  width: 70%;
+#botton11 {
+  grid-area: boton;
+}
+
+#tablero {
+  grid-area: tablero;
+  background: #f6f8ac;
+  display: grid;
+  grid-template-areas: 'dados parchis';
+  grid-template-columns: 1fr 2fr;
+  grid-gap: 10px;
+  padding: 10px;
   height: 700px;
-  float: left;
-  background: #c1ffff;
-  border: 1 px solid black;
 }
 
-#messages{
+#dados{
+  grid-area: dados;
+  height: 70px;  
+  background: #f6f8ac;
+}
+
+/*
+#interativo{
+  transform: scale(0.3);
+}
+
+#interativo1{
+  transform: scale(0.3);
+}
+*/
+
+#parchis{
+  grid-area: parchis;
+}
+
+#chat{
+  /*
   width: 30%;
   height: 650px;
   float: left;
   background: #f6f8ac;
   border: 1 px solid black;
+  */
+  grid-area: chat;
+  display: grid;
+  grid-template-areas:
+    'mensajes'
+    'texto';
+  grid-template-rows: 4fr
+                      1fr;
+  grid-gap: 10px;
+  padding: 10px;
+}
+
+#messages{
+  grid-area: mensajes;
+}
+
+#formulario{
+  grid-area: texto;
 }
