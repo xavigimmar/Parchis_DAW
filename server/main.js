@@ -43,7 +43,7 @@ app.get('/', function (req, res) {
   res.sendFile(directorio);
 });
 
-app.get('/jugar', function (req, res) {
+app.post('/jugar', function (req, res) {
   /*console.log(req.body);
   salaactual = req.params;*/
   var directorio = __dirname;
@@ -187,6 +187,9 @@ io.on('connection', function (socket) {
         if(participantesSala4.get(key) == socket.id) participantesSala4.set(key,""); 
       }
     } 
+
+    var socketuser = socket.id;
+    io.to(socketuser).emit("borrarsala");
 
     console.log(keysalas);
     console.log(participantesSala4);

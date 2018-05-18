@@ -1,14 +1,17 @@
-
+#dados{
+	transform: scale(0.3) translateX(39%) translateY(920px);
+	/* translateX(50%) translateY(50%)*/
+}
 
 #dice {
 	position: absolute;
 	top: -500px; left: 30px;
 	width: 100px; height: 100px;
  
-  -moz-backface-visibility: hidden;
+  	-moz-backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
+  	-ms-backface-visibility: hidden;
+ 	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
 
 	-webkit-transform-style: preserve-3d;
@@ -28,6 +31,7 @@
 	display: block;
 }
 
+
 #dice .front {
 	-webkit-transform: perspective(000px) rotateX(0) translateZ(50px);
 	-moz-transform: perspective(000px) rotateX(0) translateZ(50px);
@@ -35,6 +39,7 @@
 	-o-transform: perspective(000px) rotateX(0) translateZ(50px);
 	transform: perspective(000px) rotateX(0) translateZ(50px);
 }
+
 
 #dice .back {
 	background-position: -100px 0;
@@ -89,10 +94,10 @@
 	top: -500px; left: 160px;
 	width: 100px; height: 100px;
  
-  -moz-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
 	-webkit-backface-visibility: hidden;
-  -ms-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
+  	-ms-backface-visibility: hidden;
+  	-o-backface-visibility: hidden;
 	backface-visibility: hidden;
 
 	-webkit-transform-style: preserve-3d;
@@ -100,6 +105,7 @@
 	-ms-transform-style: preserve-3d;
 	-o-transform-style: preserve-3d;
 	transform-style: preserve-3d;
+	
 }
 
 #dice2 .face {
@@ -107,6 +113,7 @@
 	background-size: 300px 200px;
 	color: white;
 	font-size: 20px;
+	transform: scale(0.5);
 	position: absolute;
 	width: 100px; height: 100px;
 	display: block;
