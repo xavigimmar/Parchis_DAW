@@ -113,10 +113,15 @@ body {
     background: red;
     /*opacity: 0.7;*/
     grid-area: cabecera;
+    border-bottom: 2px black solid;
+}
+
+#opciones {
+    
 }
 
 #welcomeUser {
-    background: pink;
+    /*background: pink;*/
     /*width: 100%;
     max-width: 250px;*/
     display:inline-block;
@@ -137,17 +142,31 @@ body {
 
 #containerUser {
     /*float: right;*/
-    margin-top: 29px;
+    margin-top: 25px;
     float: left;
+    margin-left: 50px;
+    font-size: 20px;
+}
+
+#nombreUsuario {
+    color:beige;
 }
 
 #containerOpciones {
     margin-top: 29px;
     float: right;
+    margin-right: 50px;
 }
 
 #containerOpciones a {
     margin-left: 15px;
+    color: black;
+}
+
+#containerOpciones a:hover {
+    color: white;
+    /*transition: 0.5s;
+    font-size: 20px;*/
 }
 
 #menu {
@@ -155,23 +174,26 @@ body {
     height: 550px;
     line-height: 550px;*/
     grid-area: menu;
-    background-color: aliceblue;
+    /*background-color: aliceblue;*/
     text-align: center;
     position: relative;
     /*margin: 0px auto;*/
-    height: 500px;
+    height: 780px;
+    border-top: 2px black solid;
+    border-bottom: 2px black solid;
 }
 
 #fondoMenu {
-    top: 10%;
+    /*top: 10%;*/
     /*vertical-align: middle;*/
     margin: 0 auto;
+    margin-top: 130px;
 }
 
 #opcionesMenu {
     position: absolute;
-    top: 62%;
-    left: 48%;
+    top: 58%;
+    left: 49%;
     transform: translate(-50%, -50%);
     font-family: Sims;
     list-style: none;
@@ -203,7 +225,7 @@ body {
 #logoIndex {
     width: 300px;
     position: absolute;
-    top: 27%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
@@ -220,5 +242,77 @@ body {
     /*opacity: 0.7;*/
     width: 100%;
     bottom: 0;
+    height: 50px;
+    border-top: 2px black solid;
 }
 
+/* PERFIL.HTML */
+#containerPrincipalPerfil {
+    display: grid;
+    grid-template-areas: "navegacion"
+                         "contenido";
+    width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+    border: 1px black solid;
+}
+
+#navegacion {
+    grid-area: navegacion;
+    display: grid;
+    grid-template-areas: "datos estadisticas";
+    background: grey;
+}
+
+#datosUsuario {
+    grid-area: datos;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px black solid;
+    font-weight: bold;
+}
+
+#datosUsuario:hover {
+    background:#e1e1e1;
+}
+
+#estadisticasPersonales {
+    grid-area: estadisticas;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px black solid;
+    font-weight: bold;
+}
+
+#estadisticasPersonales:hover {
+    background:#e1e1e1;
+}
+
+#contenidoPerfil {
+    grid-area: contenido;
+    /*height: 400px;*/
+    /*height: 0;
+    transition: height 0.5s;*/
+    background:#9ecef3;
+    text-align:center;
+}
+
+#atrasPerfil {
+    background-color: white;
+    height: 40px;
+    width: 100px;
+    margin: 0 auto;
+    text-align:center;
+    border-radius: 10px;
+    border: 1px #45aaf2 solid;
+}
+
+#atrasPerfil a span {
+    margin-top: 11px;
+}
+
+#atrasPerfil a {
+    display: block;
+}

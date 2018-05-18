@@ -23,7 +23,7 @@ var bcrypt = require('bcrypt-nodejs');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/";
 
-// INSERTAR DATOS USUARIO COMPROBANDO ANTES SI YA EXISTE O NO
+// INSERTAR DATOS USUARIO COMPROBANDO ANTES SI YA EXISTE O NO Y ENCRIPTANDO LA CONTRASEÑA
 exports.insertarMongo = function (nombre, correo, password) {
     var insertar = true; // Boolean que indica si se inserta con éxito o no
     return new Promise(function(respuesta, error) { // Creación de promesa
@@ -77,12 +77,40 @@ exports.login = function (nombre, password) {
                         entrar = false;
                     }
                 } else { // No existe el usuario
-                    console.log(result[0]);
+                    //console.log(result[0]);
                     entrar = false;
                 }
-                console.log('Loguearse: ' + entrar);
+                //console.log('Loguearse: ' + entrar);
                 
                 respuesta(entrar); // Devuelve el boolean
+            });
+        });
+    });
+}
+
+// RECUPERAR DATOS DEL USUARIO PASADO POR PARÁMETRO
+exports.recuperarDatos = function (nombre) {
+    var datos = [];
+    //var entrar = true; // Boolean que indica si se loguea con éxito o no
+    return new Promise(function(respuesta, error) { // Creación de promesa
+        MongoClient.connect(url, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db("parchis"), // Base de datos
+                coleccion = dbo.collection("usuarios"); // Colección
+
+            // Comprobación de usuario (si existe o no)
+            coleccion.find({ "user": nombre }).toArray(function (err, result) {
+                var resultado = result[0]; // Coge el primer resultado del array
+                if (resultado != undefined) { // Si encuentra el usuario comprueba la contraseña
+                    //console.log('Email: ' + result[0].email);
+                    datos.push(result[0].user);
+                    datos.push(result[0].email);
+                } /*else { // No existe el usuario
+                    console.log(result[0]);
+                    entrar = false;
+                }*/
+                
+                respuesta(datos); // Devuelve el boolean
             });
         });
     });

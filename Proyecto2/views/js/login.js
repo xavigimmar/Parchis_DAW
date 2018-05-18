@@ -37,7 +37,10 @@ window.onload = () => {
         //console.log('Usuario en funcion datos: ' + usuario);
 
         if(logueo) { // Si se loguea correctamente
-            location.href = "../index.html?user=" + usuario; // Redirecciona a la página principal pasando el nombre de usuario por url
+            //location.href = "../index.html?user=" + usuario; // Redirecciona a la página principal pasando el nombre de usuario por url
+            location.href = "/";
+            //localStorage.setItem("user", usuario); // Asignar el nombre de usuario a un local Storage para poder usarlo en dif páginas
+            sessionStorage.setItem("user", usuario); // Asignar el nombre de usuario a un session Storage para poder usarlo en dif páginas
         } else { // Si no se ha logueado correctamente da mensaje de error
             msgLogin.innerHTML = "<div style=font-size:11px;color:red;margin-bottom:10px>Usuario o contraseña incorrectos</div>";
         }

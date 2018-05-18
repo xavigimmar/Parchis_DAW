@@ -44,8 +44,18 @@ app.get('/entrar', function(req, res) { // LOGIN DE USUARIO RECIBIENDO AJAX
     });
 });
 
+app.get('/datosUsuario', function(req, res) { // LOGIN DE USUARIO RECIBIENDO AJAX
+    mongo.recuperarDatos(req.query.nombre).then(function(resultado) {
+        res.send(resultado);
+    });
+});
+
 app.get('/salir', function(req, res) { // CERRAR SESIÓN
     res.sendFile( __dirname + '/views/cerrarSesion.html');
+});
+
+app.get('/perfil', function(req, res) { // CERRAR SESIÓN
+    res.sendFile( __dirname + '/views/perfil.html');
 });
 
 // Conexión de un nuevo socket
