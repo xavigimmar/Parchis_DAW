@@ -11,12 +11,11 @@ socket.on('messages', function (data) {
 socket.on("actualizartitulo", function (dados, room) {
   document.getElementById('h1').innerHTML = "Parchís " + " - " + room + " (" + dados[0] + "," + dados[1] + ")";
   var dice = d3.selectAll("#dice");
-  console.log(dice);
   dice.remove();
   
   var dice2 = d3.selectAll("#dice2");
-  console.log(dice2);
   dice2.remove();
+  
   dados3drival(dados);
 });
 

@@ -1,11 +1,6 @@
-#dados{
-	transform: scale(0.3) translateX(39%) translateY(920px);
-	/* translateX(50%) translateY(50%)*/
-}
-
 #dice {
 	position: absolute;
-	top: -500px; left: 30px;
+	top: -500px; /*left: 30px;*/
 	width: 100px; height: 100px;
  
   	-moz-backface-visibility: hidden;
