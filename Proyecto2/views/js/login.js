@@ -34,7 +34,7 @@ window.onload = () => {
         var msgLogin = document.getElementById("mensajeLogin"),
             usuario = document.getElementById("usuario").value;
 
-        console.log('Usuario en funcion datos: ' + usuario);
+        //console.log('Usuario en funcion datos: ' + usuario);
 
         if(logueo) { // Si se loguea correctamente
             location.href = "../index.html?user=" + usuario; // Redirecciona a la página principal pasando el nombre de usuario por url

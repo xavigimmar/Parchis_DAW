@@ -2,28 +2,40 @@
 <html>
   <head>
     <title>Parchís</title>
-    <!--<script src="/socket.io/socket.io.js"></script>-->
-    <!--<script src="client.js"></script>-->
     <link rel="icon" type="image/png" href="img/faviconParchis2.png" />
     <script src="js/index.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--<script src="https://d3js.org/d3.v5.min.js"></script>-->
     <link rel="stylesheet" href="css/style.css" type="text/css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   </head>
   <body>
     <!--<button onclick="pasarVariable('user')">Recuperar usuario</button>-->
     <!-- MENÚ -->
-    <div id="menu">
-      <div id="welcomeUser"></div>
-      <a href="/login">Iniciar Sesión</a>
-      <a href="/signup">Regístrate</a>
-      <a href="/salir">Cerrar Sesión</a>
-    </div>
+    <div class="gridIndex">
 
-    <div id="contenedorIndex">
-      <img id="fondoMenu" src="img/fondoMenu.png" />
-      <!--<button id="btnJugar">Jugar</button>-->
-      <span id="textoencima">Texto</span>
+      <div id="cabecera">
+        <div id="containerUser">
+            <div id="welcomeUser"></div>
+        </div>
+        <div id="containerOpciones">
+        </div>
+        
+      </div>
+
+      <div id="menu">
+        <img id="fondoMenu" class="img-responsive" src="img/fondoMenu.png" />
+        <img id="logoIndex" src="img/logoParchis7.png" />
+        <ul id="opcionesMenu">
+          <li id="opcionJugar"><a href="">Jugar</a></li>
+          <li id="opciones"><a href="">Opciones</a></li>
+          <li id="comojugar"><a href="">Como se juega</a></li>
+        </ul>
+      </div>
+
+      <div id="footerIndex">
+        <div class="footer">Footer</div>
+      </div>
     </div>
   </body>
 </html>
