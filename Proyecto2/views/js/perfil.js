@@ -2,9 +2,6 @@ window.onload = () => {
     
     var usuario = sessionStorage.getItem("user"); // Recuperar nombre de usuario del session Storage
 
-    
-    
-
     if(usuario == null) { // Si no está logueado lo redirige a la página principal
         location.href = "/";
     }

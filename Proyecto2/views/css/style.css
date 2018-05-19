@@ -164,9 +164,10 @@ body {
 }
 
 #containerOpciones a:hover {
-    color: white;
+    /*color: white;*/
     /*transition: 0.5s;
     font-size: 20px;*/
+    text-shadow: 2px 2px 2px white;
 }
 
 #menu {
