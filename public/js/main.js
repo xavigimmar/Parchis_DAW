@@ -20,9 +20,9 @@ socket.on("actualizartitulo", function (dados, room) {
 });
 
 socket.on("borrarsala",function(){
-  console.log(localStorage.getItem("sala"));
-  localStorage.removeItem("sala");
-  console.log(localStorage.getItem("sala"));
+  console.log(sessionStorage.getItem("sala"));
+  sessionStorage.removeItem("sala");
+  console.log(sessionStorage.getItem("sala"));
 });
 
 // mensaje de alerta de cuando se conecta un usuario a la partida
@@ -62,7 +62,7 @@ var daditos = 0;
 window.onload = function () {
 
   // paso la sala por el localstorage
-  salatual = localStorage.getItem("sala");
+  salatual = sessionStorage.getItem("sala");
 
   var titulo = document.getElementById('h1');
   titulo.innerHTML = titulo.innerHTML + " - " + salatual;

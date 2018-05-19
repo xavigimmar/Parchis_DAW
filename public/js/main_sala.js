@@ -17,24 +17,40 @@ window.onload = function () {
                 .html(elementos);
         }
 
+        socket.on("salallena", function () {
+            alert("La sala esta llena");
+        });
+    
+        socket.on("deshabilitarboton", function (sala) {
+            d3.select(sala)
+                .style("pointer-events","none")
+                .style("opacity","0.4");
+        });
+    
+        socket.on("habilitarboton", function (sala) {
+            d3.select(sala)
+                .style("pointer-events","")
+                .style("opacity","");
+        });
+
         var sala1 = document.getElementById("Sala1");
         sala1.addEventListener("click", function () {
-            localStorage.setItem("sala", "Sala1");
+            var sesion = sessionStorage.setItem("sala", "Sala1");
         });
 
         var sala2 = document.getElementById("Sala2");
         sala2.addEventListener("click", function () {
-            localStorage.setItem("sala", "Sala2");
+            var sesion = sessionStorage.setItem("sala", "Sala2");
         });
 
         var sala3 = document.getElementById("Sala3");
         sala3.addEventListener("click", function () {
-            localStorage.setItem("sala", "Sala3");
+            var sesion = sessionStorage.setItem("sala", "Sala3");
         });
 
         var sala4 = document.getElementById("Sala4");
         sala4.addEventListener("click", function () {
-            localStorage.setItem("sala", "Sala4");
+            var sesion = sessionStorage.setItem("sala", "Sala4");
         });
 
         /*

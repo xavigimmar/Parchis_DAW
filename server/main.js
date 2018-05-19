@@ -65,54 +65,75 @@ io.on('connection', function (socket) {
   socket.emit("salas", salas);
 
   socket.on("room", function (sala) {
-    socket.join(sala);
+    var contador = contadoresSalas.get(sala);
+    if (contador >= 2) {
+      io.sockets.to(socket.id).emit("salallena");
+      io.sockets.emit("deshabilitarboton",sala);
+      //location.href = "/";  
+    } else {
+      socket.join(sala);
 
-    salasuser[socket.id] = sala;
-    //console.log(salasuser);
+      salasuser[socket.id] = sala;
+      //console.log(salasuser);
 
-    if (sala == "Sala1") {
-      var keys = Array.from(participantesSala1.keys());
-      //console.log(keys);
-      var cont = contadoresSalas.get('Sala1');
-      participantesSala1.set(keys[cont], socket.id);
-      cont++;
-      contadoresSalas.set('Sala1', cont);
-      //console.log(participantesSala1);
+      if (sala == "Sala1") {
+        var keys = Array.from(participantesSala1.keys());
+        console.log("--ides de la sala: " + keys);
+        var cont = contadoresSalas.get('Sala1');
+        console.log("---personas en la sala: " + cont);
+        participantesSala1.set(keys[cont], socket.id);
+        console.log("----añade persona a la sala: ");
+        console.log(participantesSala1);
+        cont++;
+        console.log("-----suma 1 al contador: " + cont);
+        contadoresSalas.set('Sala1', cont);
+        console.log("-------valor de la sala: ");
+        console.log(contadoresSalas);
+      }
+      if (sala == "Sala2") {
+        var keys = Array.from(participantesSala2.keys());
+        console.log("--ides de la sala: " + keys);
+        var cont = contadoresSalas.get('Sala2');
+        console.log("---personas en la sala: " + cont);
+        participantesSala2.set(keys[cont], socket.id);
+        console.log("----añade persona a la sala: ");
+        console.log(participantesSala2);
+        cont++;
+        console.log("-----suma 1 al contador: " + cont);
+        contadoresSalas.set('Sala2', cont);
+        console.log("-------valor de la sala: ");
+        console.log(contadoresSalas);
+      }
+      if (sala == "Sala3") {
+        var keys = Array.from(participantesSala3.keys());
+        console.log("--ides de la sala: " + keys);
+        var cont = contadoresSalas.get('Sala3');
+        console.log("---personas en la sala: " + cont);
+        participantesSala3.set(keys[cont], socket.id);
+        console.log("----añade persona a la sala: ");
+        console.log(participantesSala3);
+        cont++;
+        console.log("-----suma 1 al contador: " + cont);
+        contadoresSalas.set('Sala3', cont);
+        console.log("-------valor de la sala: ");
+        console.log(contadoresSalas);
+      }
+      if (sala == "Sala4") {
+        var keys = Array.from(participantesSala4.keys());
+        console.log("--ides de la sala: " + keys);
+        var cont = contadoresSalas.get('Sala4');
+        console.log("---personas en la sala: " + cont);
+        participantesSala4.set(keys[cont], socket.id);
+        console.log("----añade persona a la sala: ");
+        console.log(participantesSala4);
+        cont++;
+        console.log("-----suma 1 al contador: " + cont);
+        contadoresSalas.set('Sala4', cont);
+        console.log("-------valor de la sala: ");
+        console.log(contadoresSalas);
+      }
+      console.log("Se ha conectado a la sala " + sala + "");
     }
-    if (sala == "Sala2") {
-      var keys = Array.from(participantesSala2.keys());
-      //console.log(keys);
-      var cont = contadoresSalas.get('Sala2');
-      participantesSala2.set(keys[cont], socket.id);
-      cont++;
-      contadoresSalas.set('Sala2', cont);
-      //console.log(participantesSala2);
-    }
-    if (sala == "Sala3") {
-      var keys = Array.from(participantesSala3.keys());
-      //console.log(keys);
-      var cont = contadoresSalas.get('Sala3');
-      participantesSala3.set(keys[cont], socket.id);
-      cont++;
-      contadoresSalas.set('Sala3', cont);
-      //console.log(contadoresSalas);
-    }
-    if (sala == "Sala4") {
-      var keys = Array.from(participantesSala4.keys());
-      console.log("--ides de la sala: " + keys);
-      var cont = contadoresSalas.get('Sala4');
-      console.log("---personas en la sala: " + cont);
-      participantesSala4.set(keys[cont], socket.id);
-      console.log("----añade persona a la sala: ");
-      console.log(participantesSala4);
-      cont++;
-      console.log("-----suma 1 al contador: " + cont);
-      contadoresSalas.set('Sala4', cont);
-      console.log("-------valor de la sala: ");
-      console.log(contadoresSalas);
-    }
-
-    console.log("Se ha conectado a la sala " + sala + "");
   });
 
   socket.on("new-message", function (comentarios) {
@@ -161,40 +182,45 @@ io.on('connection', function (socket) {
     console.log(contadoresSalas);
 
     delete salasuser[socket.id];
-    console.log(participantesSala4);
     var keysalas;
-    if(usersal == "Sala1") {
-      keysalas = Array.from(participantesSala1.keys()); 
-      for(let key of keysalas){
-        if(participantesSala1.get(key) == socket.id) participantesSala1.set(key,""); 
+    if (usersal == "Sala1") {
+      keysalas = Array.from(participantesSala1.keys());
+      for (let key of keysalas) {
+        if (participantesSala1.get(key) == socket.id) participantesSala1.set(key, "");
       }
+      console.log(participantesSala1);
     }
-    if(usersal == "Sala2") {
-      keysalas = Array.from(participantesSala2.keys()); 
-      for(let key of keysalas){
-        if(participantesSala2.get(key) == socket.id) participantesSala2.set(key,""); 
+    if (usersal == "Sala2") {
+      keysalas = Array.from(participantesSala2.keys());
+      for (let key of keysalas) {
+        if (participantesSala2.get(key) == socket.id) participantesSala2.set(key, "");
       }
+      console.log(participantesSala2);
     }
-    if(usersal == "Sala3") {
-      keysalas = Array.from(participantesSala3.keys()); 
-      for(let key of keysalas){
-        if(participantesSala3.get(key) == socket.id) participantesSala3.set(key,""); 
+    if (usersal == "Sala3") {
+      keysalas = Array.from(participantesSala3.keys());
+      for (let key of keysalas) {
+        if (participantesSala3.get(key) == socket.id) participantesSala3.set(key, "");
       }
+      console.log(participantesSala3);
     }
-    if(usersal == "Sala4") {
-      keysalas = Array.from(participantesSala4.keys()); 
-      for(let key of keysalas){
-        if(participantesSala4.get(key) == socket.id) participantesSala4.set(key,""); 
+    if (usersal == "Sala4") {
+      keysalas = Array.from(participantesSala4.keys());
+      for (let key of keysalas) {
+        if (participantesSala4.get(key) == socket.id) participantesSala4.set(key, "");
       }
-    } 
+      console.log(participantesSala4);
+    }
 
-    var socketuser = socket.id;
-    io.to(socketuser).emit("borrarsala");
+    io.sockets.to(socket.id).emit("borrarsala");
 
     console.log(keysalas);
-    console.log(participantesSala4);
-    //var test = salasuser.getkey();
     console.log("Se ha desconectado");
+    
+    var contador = contadoresSalas.get(usersal);
+    if (contador < 2) {
+      io.sockets.emit("habilitarboton",usersal);
+    }
   });
 
 });
