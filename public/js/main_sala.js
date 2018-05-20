@@ -16,10 +16,6 @@ window.onload = function () {
                 .attr("value", elementos)
                 .html(elementos);
         }
-
-        socket.on("salallena", function () {
-            alert("La sala esta llena");
-        });
     
         socket.on("deshabilitarboton", function (sala) {
             d3.select(sala)

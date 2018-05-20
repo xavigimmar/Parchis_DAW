@@ -12,17 +12,23 @@ socket.on("actualizartitulo", function (dados, room) {
   document.getElementById('h1').innerHTML = "Parchís " + " - " + room + " (" + dados[0] + "," + dados[1] + ")";
   var dice = d3.selectAll("#dice");
   dice.remove();
-  
+
   var dice2 = d3.selectAll("#dice2");
   dice2.remove();
-  
+
   dados3drival(dados);
 });
 
-socket.on("borrarsala",function(){
+socket.on("borrarsala", function () {
   console.log(sessionStorage.getItem("sala"));
   sessionStorage.removeItem("sala");
   console.log(sessionStorage.getItem("sala"));
+});
+
+// Decirle al cliente que la sala está llena y redirigirlo a las salas
+socket.on("salallena", function () {
+  alert("La sala esta llena");
+  location.href = "/";
 });
 
 // mensaje de alerta de cuando se conecta un usuario a la partida
@@ -58,6 +64,8 @@ function addMessage(e) {
 
 var daditos = 0;
 
+
+
 // carga de las funciones del js
 window.onload = function () {
 
@@ -69,12 +77,41 @@ window.onload = function () {
 
   // union a la sala que quiere unirse
   socket.emit("room", salatual);
-  
+
   var sala;
+
   var lanzar_dados = document.getElementById('boton');
 
   // funcion para generar los dados
   var dados;
+
+  var participantes = new Map();
+
+  /*socket.on("genteensala", function (gentedesala) {
+    participantes = gentedesala;
+    console.log("gente que hay en sala, color y turno");
+    //'#3831eb', ""     '#188300', ""     'turno', 0/1
+    console.log(participantes);
+
+    var socketcolores = Object.values(participantes);
+    var turnos = participantes.turno;
+    var tusocket = socket.id;
+    var colorparticipante;
+    if (turnos == 0) colorparticipante = socketcolores[0];
+    else colorparticipante = socketcolores[1];
+
+    console.log(colorparticipante + " - " + tusocket);
+    if (colorparticipante == tusocket) {
+
+
+    } else {
+      alert("turno del rival");
+    }
+    
+    if (turnos == 0) turnos = 1;
+    else turnos = 0;
+
+*/
   lanzar_dados.addEventListener("click", function () {
     var caca = dados3d(caca);
     dados = Array(caca[0], caca[1]);
@@ -98,9 +135,43 @@ window.onload = function () {
     .on("mouseout", descolorearcasillas);
 
 
-  function componentToHex(c) {
-    var hex = c.toString(16);
-    return hex.length == 1 ? "0" + hex : hex;
+  function seleccionarfichas() {
+    if (typeof dados != "undefined") {
+      // variable para el id de las fichas
+      var id = d3.select(this).attr("id");
+
+      // generar array para pas fichas a mover
+      if (fichasamover.length != 2) {
+        var relleno = rgb2hex(this.style.fill);
+
+        // condicion si el array ya tiene una ficha
+        if (fichasamover.length == 1) {
+          var ficha2 = new Object();
+          ficha2.id = id;
+          ficha2.fill = relleno;
+          fichasamover.push(ficha2);
+
+          //console.log(fichasamover);
+        } else {
+          // control de la posicion donde la quieres poner
+          if (relleno != "#ffffff") { // si no es blanca
+            var ficha1 = new Object();
+            ficha1.id = id;
+            ficha1.fill = relleno;
+            fichasamover.push(ficha1);
+          } else {
+            console.log("la ficha es blanca");
+          }
+        }
+      }
+
+      // hacer el movimiento cuando ya has seleccionado 2 fichas
+      if (fichasamover.length == 2) {//salatual
+        socket.emit("movimiento", fichasamover);
+        //moverfichas(fichasamover);
+        fichasamover = [];
+      }
+    }
   }
 
   function colorearcasillas() {
@@ -171,46 +242,12 @@ window.onload = function () {
     opciones = [];
   }
 
-  function seleccionarfichas() {
-    if (typeof dados != "undefined") {
-      // variable para el id de las fichas
-      var id = d3.select(this).attr("id");
-
-      // generar array para pas fichas a mover
-      if (fichasamover.length != 2) {
-        var relleno = rgb2hex(this.style.fill);
-
-        // condicion si el array ya tiene una ficha
-        if (fichasamover.length == 1) {
-          var ficha2 = new Object();
-          ficha2.id = id;
-          ficha2.fill = relleno;
-          fichasamover.push(ficha2);
-
-          //console.log(fichasamover);
-        } else {
-          // control de la posicion donde la quieres poner
-          if (relleno != "#ffffff") {
-            var ficha1 = new Object();
-            ficha1.id = id;
-            ficha1.fill = relleno;
-            fichasamover.push(ficha1);
-          } else {
-            console.log("la ficha es blanca");
-          }
-        }
-      }
-
-      // hacer el movimiento cuando ya has seleccionado 2 fichas
-      if (fichasamover.length == 2) {//salatual
-        socket.emit("movimiento", fichasamover);
-        //moverfichas(fichasamover);
-        fichasamover = [];
-      }
-    }
-  }
-
   // funcion para mover las fichas
+
+  socket.on("muevoficha", function (fichas) {
+    moverfichas(fichas);
+  });
+
   function moverfichas(fichas) {
     var r = new RegExp(/fill:#([a-f0-9]+)/);
     var r1 = new RegExp(/opacity:(0|1)+/);
@@ -264,12 +301,12 @@ window.onload = function () {
           color += ocupada.charAt(i);
         }
 
-        if (color == "#ffffff") {
-          console.log("La posicon del medio esta libre");
+        if (color == "#ffffff") { // si es blanca
+          console.log("La posición del medio está libre");
           idficha2 = pos22;
         } else if (color != "#ffffff" || (pos33 == fichas[0].fill && pos11 == fichas[0].fill)) {
           console.log("hay un puente y no puedes mover");
-          alert("hay un pueste, imposible mover");
+          alert("hay un puente, imposible mover");
           idficha2 = idficha1;
         } else if (color == fichas[0].fill) {
           console.log("la ficha 2 es del mismo color que la primera");
@@ -324,13 +361,11 @@ window.onload = function () {
     }
   }
 
-  // se ejecutara cuando el rival haga un movimiendo
-  // se le para el array de fichasamover
-  socket.on("muevoficha", function (fichas) {
-    moverfichas(fichas);
-  });
+  function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+  }
 
-  // pasar los colores de rgba a hexadecimal
   function rgb2hex(orig) {
     var rgb = orig.replace(/\s/g, '').match(/^rgba?\((\d+),(\d+),(\d+)/i);
     return (rgb && rgb.length === 4) ? "#" +
@@ -338,6 +373,15 @@ window.onload = function () {
       ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
       ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
   }
+
+
+  // se ejecutara cuando el rival haga un movimiendo
+  // se le para el array de fichasamover
+
+
+  // pasar los colores de rgba a hexadecimal
+
+
 
 
   /*// prueba de coger una ficha y ponerla verde

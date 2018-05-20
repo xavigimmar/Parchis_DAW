@@ -27,10 +27,14 @@ var participantesSala1 = new Map(),
   participantesSala3 = new Map(),
   participantesSala4 = new Map();
 
-participantesSala1.set('#3831eb', "").set('#188300', "");
-participantesSala2.set('#3831eb', "").set('#188300', "");
-participantesSala3.set('#3831eb', "").set('#188300', "");
-participantesSala4.set('#3831eb', "").set('#188300', "");
+var turno = Math.round(Math.random());
+participantesSala1.set('#3831eb', "").set('#188300', "").set('turno', turno);
+turno = Math.round(Math.random());
+participantesSala2.set('#3831eb', "").set('#188300', "").set('turno', turno);
+turno = Math.round(Math.random());
+participantesSala3.set('#3831eb', "").set('#188300', "").set('turno', turno);
+turno = Math.round(Math.random());
+participantesSala4.set('#3831eb', "").set('#188300', "").set('turno', turno);
 
 var salaactual;
 var salas = ["Sala1", "Sala2", "Sala3", "Sala4"];
@@ -68,14 +72,13 @@ io.on('connection', function (socket) {
     var contador = contadoresSalas.get(sala);
     if (contador >= 2) {
       io.sockets.to(socket.id).emit("salallena");
-      io.sockets.emit("deshabilitarboton",sala);
-      //location.href = "/";  
+      io.sockets.emit("deshabilitarboton", sala);
     } else {
       socket.join(sala);
 
       salasuser[socket.id] = sala;
       //console.log(salasuser);
-
+      var entedesala;
       if (sala == "Sala1") {
         var keys = Array.from(participantesSala1.keys());
         console.log("--ides de la sala: " + keys);
@@ -89,6 +92,7 @@ io.on('connection', function (socket) {
         contadoresSalas.set('Sala1', cont);
         console.log("-------valor de la sala: ");
         console.log(contadoresSalas);
+        gentedesala = participantesSala1;
       }
       if (sala == "Sala2") {
         var keys = Array.from(participantesSala2.keys());
@@ -103,6 +107,7 @@ io.on('connection', function (socket) {
         contadoresSalas.set('Sala2', cont);
         console.log("-------valor de la sala: ");
         console.log(contadoresSalas);
+        gentedesala = participantesSala2;
       }
       if (sala == "Sala3") {
         var keys = Array.from(participantesSala3.keys());
@@ -117,6 +122,7 @@ io.on('connection', function (socket) {
         contadoresSalas.set('Sala3', cont);
         console.log("-------valor de la sala: ");
         console.log(contadoresSalas);
+        gentedesala = participantesSala3;
       }
       if (sala == "Sala4") {
         var keys = Array.from(participantesSala4.keys());
@@ -131,8 +137,14 @@ io.on('connection', function (socket) {
         contadoresSalas.set('Sala4', cont);
         console.log("-------valor de la sala: ");
         console.log(contadoresSalas);
+        gentedesala = participantesSala4;
       }
       console.log("Se ha conectado a la sala " + sala + "");
+
+      //'#3831eb', ""     '#188300', ""     'turno', turno
+      var gente = { '#3831eb':gentedesala.get('#3831eb'), '#188300':gentedesala.get('#188300'), "turno":gentedesala.get('turno')}
+      console.log(gente);
+      io.sockets.in(sala).emit("genteensala", gente);
     }
   });
 
@@ -216,10 +228,10 @@ io.on('connection', function (socket) {
 
     console.log(keysalas);
     console.log("Se ha desconectado");
-    
+
     var contador = contadoresSalas.get(usersal);
     if (contador < 2) {
-      io.sockets.emit("habilitarboton",usersal);
+      io.sockets.emit("habilitarboton", usersal);
     }
   });
 
