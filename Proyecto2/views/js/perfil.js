@@ -8,7 +8,6 @@ window.onload = () => {
 
     ////////////////////////////
     
-
     // FUNCIONES
     function mostrarDatos(datosUsu) {
         var divDatos = document.getElementById("datosUsuario"),
