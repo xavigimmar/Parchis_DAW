@@ -142,7 +142,7 @@ io.on('connection', function (socket) {
       console.log("Se ha conectado a la sala " + sala + "");
 
       //'#3831eb', ""     '#188300', ""     'turno', turno
-      var gente = { '#3831eb':gentedesala.get('#3831eb'), '#188300':gentedesala.get('#188300'), "turno":gentedesala.get('turno')}
+      var gente = { '#3831eb': gentedesala.get('#3831eb'), '#188300': gentedesala.get('#188300'), "turno": gentedesala.get('turno') }
       console.log(gente);
       io.sockets.in(sala).emit("genteensala", gente);
     }
@@ -165,6 +165,17 @@ io.on('connection', function (socket) {
     io.sockets.in(getRoom(socket)).emit("actualizartitulo", dados, getRoom(socket));
   });
 
+  socket.on("cambiarturno", function (turnos2) {
+    var actualizarturno;
+    if (getRoom(socket) == "Sala1") participantesSala1.set("turno", turnos2), actualizarturno = participantesSala1;
+    if (getRoom(socket) == "Sala2") participantesSala2.set("turno", turnos2), actualizarturno = participantesSala2;
+    if (getRoom(socket) == "Sala3") participantesSala3.set("turno", turnos2), actualizarturno = participantesSala3;
+    if (getRoom(socket) == "Sala4") participantesSala4.set("turno", turnos2), actualizarturno = participantesSala4;
+
+    var actualizarturno2 = { '#3831eb': actualizarturno.get('#3831eb'), '#188300': actualizarturno.get('#188300'), "turno": actualizarturno.get('turno') };
+
+    io.sockets.in(getRoom(socket)).emit("genteensala", actualizarturno2);
+  });
 
   socket.on("rgbTohx", function (color) {
     var hx = "#" + rgbHex(color);
