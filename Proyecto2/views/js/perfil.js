@@ -8,7 +8,6 @@ window.onload = () => {
 
     ////////////////////////////
     
-
     // FUNCIONES
     function mostrarDatos(datosUsu) {
         var divDatos = document.getElementById("datosUsuario"),
@@ -26,7 +25,7 @@ window.onload = () => {
         divEstadisticas.addEventListener("click", function() {
             divDatos.style.background = "grey";
             this.style.background = "#9ecef3";
-            contenido.innerHTML = "hola";
+            contenido.innerHTML = "Estadísticas";
     
         });
     
