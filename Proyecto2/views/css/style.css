@@ -149,6 +149,12 @@ body {
     color:beige;
 }
 
+#nombreUsuario a {
+    text-decoration: none;
+    
+}
+
+
 #containerOpciones {
     margin-top: 29px;
     float: right;
