@@ -63,7 +63,7 @@ window.onload = () => {
     var year = fecha.getFullYear();
     copyrightFooter.innerHTML = copyrightFooter.innerHTML + " " + year;
 
-    // DEFINICIÓN DE EVENTOS
+    // DEFINICIÓN DE EVENTOS EN LOS BOTONES
 
 
 }
