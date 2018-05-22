@@ -184,7 +184,9 @@ window.onload = function () {
           socket.emit("movimiento", fichasamover);
           fichasamover = [];
 
-
+          if (toca == 0) toca = 1;
+          else toca = 0;
+          socket.emit("cambiarturno", toca);
         }
       }
     }
@@ -395,17 +397,14 @@ window.onload = function () {
         ("0" + parseInt(rgb[2], 10).toString(16)).slice(-2) +
         ("0" + parseInt(rgb[3], 10).toString(16)).slice(-2) : orig;
     }
-    
+    /*
     svg
       .selectAll('*[id^="ficha"]')   // selecciona todos los elementos que empiezen por el id ficha
       .on("mouseover", function () { }) // funcion para iluminar casillas donde puedes poner las fichas
       .on("click", function () { }) //funcion para seleccionar fichas
       .on("mouseout", function () { });
     lanzar_dados.removeEventListener("click", lanzardados);
-
-    if (toca == 0) toca = 1;
-    else toca = 0;
-    socket.emit("cambiarturno", toca);
+       */
 
   }
 
